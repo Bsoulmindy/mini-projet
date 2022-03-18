@@ -2,7 +2,6 @@ package com.terroir.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -11,12 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Embeddable
 public class ProduitMatiereKey implements Serializable {
-
-    @Column(name = "product_id")
-    Long idProduit;
-
-    @Column(name = "matiere_id")
-    Long idMatierePremiere;
-
-
+    int produit_idref;
+    int matiere_premiere_idref;
 }

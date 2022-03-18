@@ -15,12 +15,14 @@ public class MatierePremiere {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long idMatierePremiere;
+    private int matiere_premiere_id;
 
-    private String nom;
+    private String matiere_premiere_nom;
 
+
+    // LES METHODES
     @OneToMany(mappedBy = "matierePremiere",cascade = CascadeType.PERSIST)
+    @Builder.Default
     List<ProduitMatiereAsso> produitMatieres=new ArrayList<>();
 
 }

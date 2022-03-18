@@ -6,7 +6,7 @@ import com.terroir.entities.Produit;
 import java.util.List;
 
 public interface IProduitService {
-    public long addProduit(Produit pr, MatierePremiere... listMatiere);
-    public long addProduit(Produit pr, Long... ids);
-    public List<Long> getListProduitsParMatiers(Long... idmatps);
+    public int addProduit(Produit pr, MatierePremiere... listMatiere);
+    public int addProduit(Produit pr, int... ids);
+    public List<Integer> getListProduitsParMatiers(int... idmatps);
 }

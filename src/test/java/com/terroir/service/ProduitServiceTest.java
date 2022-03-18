@@ -27,10 +27,10 @@ public class ProduitServiceTest {
 
     @Test
     public void getListProduitsParMatiers() {
-        List<Long> lid = produitService.getListProduitsParMatiers(1L);
-        Long id = lid.get(2);
+        List<Integer> lid = produitService.getListProduitsParMatiers(1);
+        int id = lid.get(2);
             Produit produit = produitRepo.findById(id).get();
-            assertEquals(produit.getNom(),"produit4");
+            assertEquals(produit.getProduit_nom(),"produit4");
     }
 
 

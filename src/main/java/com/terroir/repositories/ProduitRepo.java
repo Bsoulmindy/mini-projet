@@ -7,12 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ProduitRepo extends JpaRepository<Produit,Long> {
+public interface ProduitRepo extends JpaRepository<Produit,Integer> {
    @Query("select p from Produit as p " +
            "inner join p.produitMatieresAsso as pmass " +
            "inner join pmass.matierePremiere as pm " +
            "on pm.idMatierePremiere = :idmatp")
-    public List<Produit> getProduits(@Param("idmatp") Long idmatp);
+    public List<Produit> getProduits(@Param("idmatp") int idmatp);
 
 
 }

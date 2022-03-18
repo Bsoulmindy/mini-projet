@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+
+import com.terroir.entities.enumerations.Unite;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +22,19 @@ import java.util.List;
 public class Produit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long idProduit;
-    @Column(name="nom")
-    private String nom;
-    @Column(name="descr")
-    private String descr;
+    private int produit_id;
+
+    private String produit_nom;
+
+    private String produit_desc;
+
+    private float produit_prix;
+
+    @Enumerated(EnumType.STRING)
+    private Unite produit_unite;
+
+
+    // LES METHODES
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "produit",
             cascade = {CascadeType.MERGE,
@@ -33,4 +43,10 @@ public class Produit {
     @Builder.Default
     List<ProduitMatiereAsso> produitMatieresAsso=new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "cooperative_idref")
+    private Cooperative cooperative;
+
+    @ManyToMany(mappedBy = "produits")
+    private List<Commande> commandes;
 }

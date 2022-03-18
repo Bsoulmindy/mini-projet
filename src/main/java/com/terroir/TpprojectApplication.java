@@ -52,11 +52,11 @@ public class TpprojectApplication implements CommandLineRunner {
         //produitService.addProduit(pr1, mp1, mp3);
         //produitService.addProduit(pr2, mp1);
 
-        List<Long> lid = produitService.getListProduitsParMatiers(1L);
-        for (Long idproduit : lid)
+        List<Integer> lid = produitService.getListProduitsParMatiers(1);
+        for (int idproduit : lid)
         {
             Optional<Produit> produit = produitRepo.findById(idproduit);
-            System.out.println(produit.get().getNom());
+            System.out.println(produit.get().getProduit_nom());
         }
 
        // System.out.println(cp.size());

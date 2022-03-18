@@ -23,11 +23,11 @@ public class ProduitService implements IProduitService {
     MatiereRepo matiereRepo;
 
     @Transactional
-    public long addProduit(Produit pr, MatierePremiere... listMatiere) {
+    public int addProduit(Produit pr, MatierePremiere... listMatiere) {
 
         for (MatierePremiere mp : listMatiere) {
             ProduitMatiereAsso ligne = new ProduitMatiereAsso();
-         MatierePremiere mpr = matiereRepo.findByNom(mp.getNom());
+         MatierePremiere mpr = matiereRepo.findByNom(mp.getMatiere_premiere_nom());
          Collection<ProduitMatiereAsso> lignes = pr.getProduitMatieresAsso();
          if(mpr==null)
          {
@@ -42,15 +42,15 @@ public class ProduitService implements IProduitService {
            }
         }
         produitRepo.save(pr);
-        return pr.getIdProduit();
+        return pr.getProduit_id();
     }
 
     @Override
-    public long addProduit(Produit pr, Long... ids) {
-        for (Long id : ids) {
+    public int addProduit(Produit pr, int... ids) {
+        for (int id : ids) {
             ProduitMatiereAsso ligne = new ProduitMatiereAsso();
             MatierePremiere mprp = matiereRepo.findById(id).get();
-            MatierePremiere mpr = matiereRepo.findByNom(mprp.getNom());
+            MatierePremiere mpr = matiereRepo.findByNom(mprp.getMatiere_premiere_nom());
             Collection<ProduitMatiereAsso> lignes = pr.getProduitMatieresAsso();
             if(mpr==null)
             {
@@ -65,22 +65,22 @@ public class ProduitService implements IProduitService {
             }
         }
         produitRepo.save(pr);
-        return pr.getIdProduit();
+        return pr.getProduit_id();
     }
 
 
     @Override
-    public List<Long> getListProduitsParMatiers(Long... idmatps)
+    public List<Integer> getListProduitsParMatiers(int... idmatps)
     {
-        List<Long> ids1=produitRepo.getProduits(idmatps[0])
+        List<Integer> ids1=produitRepo.getProduits(idmatps[0])
                 .stream()
-                .map(produit -> produit.getIdProduit())
+                .map(produit -> produit.getProduit_id())
                 .collect(Collectors.toList());
 
-        for(Long idmatp : idmatps) {
-           List<Long >ids = produitRepo.getProduits(idmatp)
+        for(int idmatp : idmatps) {
+           List<Integer >ids = produitRepo.getProduits(idmatp)
                     .stream()
-                    .map(produit -> produit.getIdProduit())
+                    .map(produit -> produit.getProduit_id())
                     .collect(Collectors.toList());
 
            ids1 = ids1.stream()

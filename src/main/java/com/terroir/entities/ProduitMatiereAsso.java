@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import com.terroir.entities.enumerations.Unite;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,27 +14,26 @@ import javax.persistence.*;
 public class ProduitMatiereAsso {
 
     @EmbeddedId
-    ProduitMatiereKey id=new ProduitMatiereKey();
+    ProduitMatiereKey idref=new ProduitMatiereKey();
 
-    @ManyToOne(cascade = {CascadeType.ALL
-                         //CascadeType.MERGE,
-                         // CascadeType.DETACH,
-                         // CascadeType.PERSIST
-                        })
-    @MapsId("idProduit")
-    @JoinColumn(name = "idproduit")
+    private int matiere_premiere_quantite;
+
+    @Enumerated(EnumType.STRING)
+    private Unite matiere_premiere_unite;
+
+
+    // LES METHODES
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @MapsId("produit_idref")
+    @JoinColumn(name = "produit_idref")
     Produit produit;
 
-    @ManyToOne(cascade = {CascadeType.ALL
-                           //CascadeType.MERGE,
-                           // CascadeType.DETACH,
-                           // CascadeType.PERSIST
-                         })
-    @MapsId("idMatierePremiere")
-    @JoinColumn(name = "idmatiere")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @MapsId("matiere_premiere_idref")
+    @JoinColumn(name = "matiere_premiere_idref")
     MatierePremiere matierePremiere;
 
     @ManyToOne
+    @JoinColumn(name="origine_idref")
     private Origine origine;
-
 }

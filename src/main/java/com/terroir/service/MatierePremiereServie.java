@@ -21,7 +21,7 @@ public class MatierePremiereServie implements  IMatierePremiereService{
     @Override
     public void addMatierePremiere(MatierePremiere matierePremiere)
             throws MatiereDejaExist {
-        String nom = matierePremiere.getNom();
+        String nom = matierePremiere.getMatiere_premiere_nom();
         MatierePremiere mp = this.findByNom(nom);
         if(mp!=null) throw   new MatiereDejaExist();
         else  {
