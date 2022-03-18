@@ -1,13 +1,13 @@
-package miniprojet.miniprojet;
+package com.miniprojet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MiniProjetApplication {
+public class MiniprojetApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MiniProjetApplication.class, args);
+		SpringApplication.run(MiniprojetApplication.class, args);
 	}
 
 }
