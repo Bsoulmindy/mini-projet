@@ -3,6 +3,8 @@ package com.terroir.service;
 import com.terroir.entities.MatierePremiere;
 import com.terroir.exception.MatiereDejaExist;
 import com.terroir.repositories.MatiereRepo;
+import com.terroir.services.IMatierePremiereService;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,9 @@ public class MatierePremiereServieTest {
     MatiereRepo matiereRepo;
 
     @Test(expected = MatiereDejaExist.class)
-    public  void testAddException() throws MatiereDejaExist {
-        MatierePremiere mp= matiereRepo.findByNom("m4");
+    public void testAddException() throws MatiereDejaExist {
+        MatierePremiere mp = matiereRepo.findByNom("m4");
         matierePremiereService.addMatierePremiere(mp);
-         fail("Exception non lévée");
+        fail("Exception non lévée");
     }
 }

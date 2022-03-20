@@ -19,7 +19,6 @@ public class Cooperative {
     @Enumerated(EnumType.STRING)
     private SecteurActivite cooperative_secteur_activite;
 
-
     // LES METHODES
     @ManyToOne
     @JoinColumn(name = "origine_idref")

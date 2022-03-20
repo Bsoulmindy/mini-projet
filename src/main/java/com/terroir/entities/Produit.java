@@ -1,11 +1,9 @@
 package com.terroir.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import javax.persistence.*;
 
@@ -33,15 +31,11 @@ public class Produit {
     @Enumerated(EnumType.STRING)
     private Unite produit_unite;
 
-
     // LES METHODES
-    @OneToMany(fetch = FetchType.EAGER,
-            mappedBy = "produit",
-            cascade = {CascadeType.MERGE,
-                    CascadeType.DETACH,
-                    CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "produit", cascade = {
+            CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST })
     @Builder.Default
-    List<ProduitMatiereAsso> produitMatieresAsso=new ArrayList<>();
+    List<ProduitMatiereAsso> produitMatieresAsso = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "cooperative_idref")

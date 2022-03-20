@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,10 +18,9 @@ public class MatierePremiere {
 
     private String matiere_premiere_nom;
 
-
     // LES METHODES
-    @OneToMany(mappedBy = "matierePremiere",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "matierePremiere", cascade = CascadeType.PERSIST)
     @Builder.Default
-    List<ProduitMatiereAsso> produitMatieres=new ArrayList<>();
+    List<ProduitMatiereAsso> produitMatieres = new ArrayList<>();
 
 }
