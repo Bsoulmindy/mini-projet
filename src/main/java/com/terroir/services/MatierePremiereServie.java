@@ -13,11 +13,10 @@ public class MatierePremiereServie implements IMatierePremiereService {
     MatiereRepo matiereRepo;
 
     @Override
-    public MatierePremiere findByNom(String nom) { return matiereRepo.findByNom(nom); }
+    public MatierePremiere findByNom(String nom) { return matiereRepo.getByNom(nom); }
 
     @Override
-    public void addMatierePremiere(MatierePremiere matierePremiere)
-            throws MatiereDejaExist {
+    public void addMatierePremiere(MatierePremiere matierePremiere) throws MatiereDejaExist {
         String nom = matierePremiere.getMatiere_premiere_nom();
         MatierePremiere mp = this.findByNom(nom);
         if (mp != null)

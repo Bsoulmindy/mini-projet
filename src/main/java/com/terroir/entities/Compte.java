@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 @Data
+@Entity
 public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,7 +25,7 @@ public class MatierePremiereServieTest {
 
     @Test(expected = MatiereDejaExist.class)
     public void testAddException() throws MatiereDejaExist {
-        MatierePremiere mp = matiereRepo.findByNom("m4");
+        MatierePremiere mp = matiereRepo.getByNom("m4");
         matierePremiereService.addMatierePremiere(mp);
         fail("Exception non lévée");
     }

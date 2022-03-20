@@ -9,6 +9,7 @@ import javax.persistence.*;
 import com.terroir.entities.enumerations.SecteurActivite;
 
 @Data
+@Entity
 public class Cooperative {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
