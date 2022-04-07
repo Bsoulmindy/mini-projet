@@ -42,7 +42,7 @@ public class Produit {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "produit", cascade = { CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.PERSIST })
     @Builder.Default
-    List<ProduitMatiereAsso> produitMatieresAsso = new ArrayList<>();
+    List<ProduitMatiereAsso> produitMatieresAsso = new ArrayList<ProduitMatiereAsso>();
 
     @ManyToOne
     @JoinColumn(name = "cooperative_idref")
