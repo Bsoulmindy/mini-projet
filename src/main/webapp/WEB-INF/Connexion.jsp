@@ -36,39 +36,32 @@
     <body>
         <c:import url="/inc/header.jsp"/>
 
-        <c:if test="${errors != null}">
-        <div class="d-flex flex-row justify-content-center my-2">
-            <div class="alert danger" style="color: white" role="alert">
-                <ul>
-                      <c:forEach items="${errors}" var="error">
-                        <li><c:out value="${error.defaultMessage}" /></li>
-                      </c:forEach>
-                    </ul>
-            </div>
-        </div>
-        </c:if>
+        
 
         <header id="header" class="ex-2-header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <div class="d-flex flex-row justify-content-center my-2" id="statusDiv">
+                        
+                    </div>
                     <h1>Connexion</h1>
                    <p>Nouveau? <a class="white" style="text-decoration: underline;" href="/inscription">Créer votre compte</a></p> 
                     <!-- Sign Up Form -->
                     <div class="form-container">
-                        <form id="logInForm" data-toggle="validator" data-focus="false" method="post" action="/auth/connexion">
+                        <form id="logInForm" data-toggle="validator" data-focus="false" method="post" action="/connexion">
                             <div class="form-group">
-                                <input type="email" class="form-control-input" id="lemail" required>
-                                <label class="label-control" for="email">Email</label>
+                                <label class="label-control" for="username">Username</label>
+                                <input type="text" class="form-control-input" id="lusername" name="username" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control-input" id="lpassword" required>
                                 <label class="label-control" for="password">Mot de passe</label>
+                                <input type="password" class="form-control-input" id="lpassword" name="password" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">Connexion</button>
+                                <button type="submit" class="form-control-submit-button" onclick="connecter(event)">Connexion</button>
                             </div>
                             <div class="form-message">
                                 <div id="lmsgSubmit" class="h3 text-center hidden"></div>
@@ -83,7 +76,9 @@
     </header> <!-- end of ex-header -->
     <!-- end of header -->
 
+
         <c:import url="/inc/footer.jsp"/>
+        <script src="inc/js/connexion.js"></script>
     </body>
 
   </html>

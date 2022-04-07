@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.Cookie;
 
 @Service
 public class ProduitService implements IProduitService {
@@ -70,11 +73,11 @@ public class ProduitService implements IProduitService {
 
     @Override
     public List<Integer> getListProduitsParMatiers(int... idmatps) {
-        List<Integer> ids1 = produitRepo.getProduits(idmatps[0]).stream().map(produit -> produit.getProduit_id())
+        List<Integer> ids1 = produitRepo.getProduitsByIdMatierePremiere(idmatps[0]).stream().map(produit -> produit.getProduit_id())
                 .collect(Collectors.toList());
 
         for (int idmatp : idmatps) {
-            List<Integer> ids = produitRepo.getProduits(idmatp).stream().map(produit -> produit.getProduit_id())
+            List<Integer> ids = produitRepo.getProduitsByIdMatierePremiere(idmatp).stream().map(produit -> produit.getProduit_id())
                     .collect(Collectors.toList());
 
             ids1 = ids1.stream()
@@ -83,5 +86,34 @@ public class ProduitService implements IProduitService {
         }
 
         return ids1;
+    }
+
+    @Override
+    public List<Produit> getProduitsById(int... ids)
+    {
+        List<Produit> produitsTrouvees = new ArrayList<>();
+
+        for (int id : ids) {
+            try {
+                produitsTrouvees.add(produitRepo.findById(id).get()); 
+            } catch (Exception e) {}
+        }
+
+        return produitsTrouvees;
+    }
+
+    public List<Produit> getProduitsInCookies(Cookie[] cookies)
+    {
+        List<Produit> produits = new ArrayList<>();
+		for (Cookie cookie : cookies) {
+			try {
+				int idProduit = Integer.parseInt(cookie.getName());
+				Produit produit = produitRepo.getById(idProduit);
+                produits.add(produit);
+			} catch (Exception e) {
+				continue;
+			}
+		}
+        return produits;
     }
 }

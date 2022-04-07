@@ -12,6 +12,6 @@ import java.util.List;
 public interface ProduitRepo extends JpaRepository<Produit, Integer> {
     @Query("select p from Produit as p " + "inner join p.produitMatieresAsso as pmass "
             + "inner join pmass.matierePremiere as pm " + "on pm.matiere_premiere_id = :idmatp")
-    public List<Produit> getProduits(@Param("idmatp") int idmatp);
+    public List<Produit> getProduitsByIdMatierePremiere(@Param("idmatp") int idmatp);
 
 }

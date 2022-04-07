@@ -27,4 +27,7 @@ public class Cooperative {
 
     @OneToMany(mappedBy = "cooperative")
     private List<Produit> produits;
+
+    @OneToOne(mappedBy = "cooperative")
+    private DemandeCooperative demandeCooperative;
 }

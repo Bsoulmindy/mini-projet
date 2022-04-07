@@ -31,4 +31,12 @@ public interface IProduitService {
      * @return <code>Liste</code> des ids des produits
      */
     public List<Integer> getListProduitsParMatiers(int... idmatps);
+
+    /**
+     * Recuperer les produits à partir de ses ids
+     * 
+     * @param ids
+     * @return
+     */
+    public List<Produit> getProduitsById(int... ids);
 }

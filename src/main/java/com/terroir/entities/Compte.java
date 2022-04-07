@@ -11,7 +11,15 @@ public class Compte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int compte_id;
 
-    private String compte_email;
+    @Column(unique = true)
+    private String compte_username;
 
     private String compte_password;
+
+    private boolean isAdmin;
+
+
+
+    @OneToOne(mappedBy = "compte")
+    private Personne personne;
 }

@@ -65,20 +65,20 @@
                    <p>Vous avez déjà un compte?  <a class="white" style="text-decoration: underline;" href="/connexion">Connectez-vous</a></p> 
                     <!-- Sign Up Form -->
                     <div class="form-container">
-                        <form id="signUpForm" data-toggle="validator" data-focus="false" method="post" action="/auth/inscription">
+                        <form id="signUpForm" data-toggle="validator" data-focus="false" method="post" action="/inscription">
                             <div class="form-group">
-                                <input type="email" class="form-control-input" id="semail" required>
-                                <label class="label-control" for="email">Email</label>
+                                <label class="label-control" for="text">Username</label>
+                                <input type="text" class="form-control-input" id="semail" name="username" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control-input" id="sname" required>
                                 <label class="label-control" for="name">Nom</label>
+                                <input type="text" class="form-control-input" id="sname" name="nom" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control-input" id="spassword" required>
                                 <label class="label-control" for="password">Mot de passe</label>
+                                <input type="password" class="form-control-input" id="spassword" name="password" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
