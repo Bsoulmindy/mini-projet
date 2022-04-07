@@ -1,6 +1,4 @@
 package com.terroir;
-
-import com.terroir.entities.Produit;
 import com.terroir.repositories.ProduitRepo;
 import com.terroir.services.IMatierePremiereService;
 import com.terroir.services.IProduitService;
@@ -10,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.*;
+ 
 
 @SpringBootApplication
 public class TpprojectApplication implements CommandLineRunner {
@@ -44,11 +42,11 @@ public class TpprojectApplication implements CommandLineRunner {
                 // produitService.addProduit(pr1, mp1, mp3);
                 // produitService.addProduit(pr2, mp1);
 
-                List<Integer> lid = produitService.getListProduitsParMatiers(1);
+              /*   List<Integer> lid = produitService.getListProduitsParMatiers(1);
                 for (int idproduit : lid) {
                         Optional<Produit> produit = produitRepo.findById(idproduit);
                         System.out.println(produit.get().getProduit_nom());
-                }
+                } */
 
                 // System.out.println(cp.size());
         }

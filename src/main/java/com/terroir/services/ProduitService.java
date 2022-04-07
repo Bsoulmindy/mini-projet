@@ -84,4 +84,18 @@ public class ProduitService implements IProduitService {
 
         return ids1;
     }
+
+    public Produit getProduit(int id) {
+        //TODO
+        return null;
+    }
+
+    public List<Integer> getListProduitsParOrigine(int idorigine) {
+        //TODO
+        return null;
+    }
+
+    public List<Integer> getListProduitsParCat(int idcat) {
+        return null;
+    }
 }

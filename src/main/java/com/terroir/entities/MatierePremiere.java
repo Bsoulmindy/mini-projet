@@ -21,6 +21,6 @@ public class MatierePremiere {
     // LES METHODES
     @OneToMany(mappedBy = "matierePremiere", cascade = CascadeType.PERSIST)
     @Builder.Default
-    List<ProduitMatiereAsso> produitMatieres = new ArrayList<>();
+    List<ProduitMatiereAsso> produitMatieres = new ArrayList<ProduitMatiereAsso>();
 
 }
