@@ -1,13 +1,16 @@
 package com.terroir.services;
 
+import com.terroir.entities.Cooperative;
 import com.terroir.entities.MatierePremiere;
 import com.terroir.entities.Produit;
 import com.terroir.entities.ProduitMatiereAsso;
+ 
 import com.terroir.repositories.MatiereRepo;
 import com.terroir.repositories.ProduitRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +27,12 @@ public class ProduitService implements IProduitService {
 
     @Autowired
     MatiereRepo matiereRepo;
+    /**
+     *  Ajouter à un produit les matiéres premiére par leur noms
+     * @param produit
+     * @param listMatiers
+     * @return
+     */
 
     @Transactional
     public int addProduit(Produit pr, MatierePremiere... listMatiere) {
@@ -47,6 +56,12 @@ public class ProduitService implements IProduitService {
         return pr.getProduit_id();
     }
 
+    /**
+     *  Ajouter à un produit les matiéres premiére par leur ids
+     * @param produit
+     * @param listIdsMatiers
+     * @return
+     */
     @Override
     public int addProduit(Produit pr, int... ids) {
         for (int id : ids) {
@@ -71,6 +86,11 @@ public class ProduitService implements IProduitService {
         return pr.getProduit_id();
     }
 
+    /**
+     *   Récupére list ids des produits par ses matiéres premiéres(ids)
+     * @param listIdsMatiers
+     * @return
+     */
     @Override
     public List<Integer> getListProduitsParMatiers(int... idmatps) {
         List<Integer> ids1 = produitRepo.getProduitsByIdMatierePremiere(idmatps[0]).stream().map(produit -> produit.getProduit_id())
@@ -87,7 +107,11 @@ public class ProduitService implements IProduitService {
 
         return ids1;
     }
-
+    /**
+     *  Récupére list ids des produits par leur ids
+     * @param listIdsProduits
+     * @return
+     */
     @Override
     public List<Produit> getProduitsById(int... ids)
     {
@@ -101,7 +125,11 @@ public class ProduitService implements IProduitService {
 
         return produitsTrouvees;
     }
-
+    /**
+     *  Récupére list Produit exist dans les cookies(navigateur client)
+     * @param listIdsProduits
+     * @return
+     */
     public List<Produit> getProduitsInCookies(Cookie[] cookies)
     {
         List<Produit> produits = new ArrayList<>();
@@ -115,5 +143,36 @@ public class ProduitService implements IProduitService {
 			}
 		}
         return produits;
+    }
+ 
+    @Override
+    public List<Produit> getPopularProduits() {
+
+         
+
+        return produitRepo.getPopularProduits();
+    }
+
+    
+    public List<Produit> getNewProducts() {
+        return produitRepo.findAll();
+    }
+
+    public List<Produit> getProduitsByMPandOrigineandCategorie(PathVariable matierePremiere, PathVariable origine,
+            PathVariable categorie) {
+
+        return produitRepo.getProduitsByMPandOrigineandCategorie(matierePremiere, origine, categorie);
+    }
+
+    public List<Cooperative> getCooperativesbyRegionandSecteur(PathVariable region, PathVariable secteur) {
+        return null;
+    }
+
+    public Cooperative getCooperativeDesc(PathVariable cooperative_id) {
+        return null;
+    }
+
+    public Produit getProduitDesc(PathVariable produit_id) {
+        return null;
     }
 }
