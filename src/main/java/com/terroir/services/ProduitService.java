@@ -4,7 +4,7 @@ import com.terroir.entities.Cooperative;
 import com.terroir.entities.MatierePremiere;
 import com.terroir.entities.Produit;
 import com.terroir.entities.ProduitMatiereAsso;
- 
+import com.terroir.repositories.CooperativeRepo;
 import com.terroir.repositories.MatiereRepo;
 import com.terroir.repositories.ProduitRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,9 @@ public class ProduitService implements IProduitService {
 
     @Autowired
     MatiereRepo matiereRepo;
+
+    @Autowired
+    CooperativeRepo cooperativeRepo;
     /**
      *  Ajouter à un produit les matiéres premiére par leur noms
      * @param produit
@@ -158,21 +161,41 @@ public class ProduitService implements IProduitService {
         return produitRepo.findAll();
     }
 
+
     public List<Produit> getProduitsByMPandOrigineandCategorie(PathVariable matierePremiere, PathVariable origine,
             PathVariable categorie) {
+        List<Produit> produits = produitRepo.findAll();
+        List<Produit> produitsTrouvees = new ArrayList<>();
+        for(Produit produit : produits) {
+            if(matierePremiere != null && matierePremiere.toString() !=  ""  && produit) {
+                produitsTrouvees.add(produit);
+            }
+        }
+        
 
-        return produitRepo.getProduitsByMPandOrigineandCategorie(matierePremiere, origine, categorie);
+        return ;
     }
+
 
     public List<Cooperative> getCooperativesbyRegionandSecteur(PathVariable region, PathVariable secteur) {
-        return null;
+        List<Cooperative> cooperatives = cooperativeRepo.findAll();
+        List<Cooperative> cooperativesTrouvees = new ArrayList<>();
+        for(Cooperative cooperative : cooperatives) {
+            if(cooperative.getOrigine().getOrigine_nom().equals(region.toString()) && 
+               cooperative.getCooperative_secteur_activite().toString().equals(secteur.toString())) {
+                cooperativesTrouvees.add(cooperative);
+            }
+        }
+        return cooperativesTrouvees;
     }
+
 
     public Cooperative getCooperativeDesc(PathVariable cooperative_id) {
-        return null;
+        return cooperativeRepo.getCooperativeDesc(cooperative_id);
     }
 
+
     public Produit getProduitDesc(PathVariable produit_id) {
-        return null;
+        return produitRepo.getProduitDesc(produit_id);
     }
 }

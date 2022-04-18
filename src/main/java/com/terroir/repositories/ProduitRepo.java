@@ -27,9 +27,12 @@ public interface ProduitRepo extends JpaRepository<Produit, Integer> {
    public List<Produit> getNewProducts();
 
 
-   @Query("select p from Produit as p " + "inner join p.produitMatieresAsso as pmass "
-   + "inner join pmass.matierePremiere as pm " + "on pm.matiere_premiere_id = :idmatp")
+   
   public List<Produit> getProduitsByMPandOrigineandCategorie(PathVariable matierePremiere, PathVariable origine,
                 PathVariable categorie);
+
+
+@Query("select * from Produit where produit_id = :produit_id")
+public Produit getProduitDesc(PathVariable produit_id);
 
 }

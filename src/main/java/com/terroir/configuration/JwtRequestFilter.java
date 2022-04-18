@@ -22,9 +22,11 @@ import io.jsonwebtoken.ExpiredJwtException;
  * Cette classe va être éxecuter pour chaque requête, elle vérifie si la requête a un JWT token valide.
  * S'il a un JWT token valide, elle va insérer l'authentification dans le context
  */
-@Component
-public class JwtRequestFilter extends OncePerRequestFilter {
 
+@Component
+public class JwtRequestFilter //extends OncePerRequestFilter 
+{
+/*
 	@Autowired
 	private CompteDetailsServiceImpl compteDetails;
 
@@ -37,7 +39,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		String token = null;
 		String username = null;
-		for (Cookie cookie : request.getCookies()) {
+		 for (Cookie cookie : request.getCookies()) {
 			if(cookie.getName().compareTo("jwtToken") == 0)
 			{
 				token = cookie.getValue();
@@ -50,7 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				}
 				break;
 			}
-		}
+		} 
 
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -73,5 +75,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		}
 		chain.doFilter(request, response);
 	}
-
+*/
 }
