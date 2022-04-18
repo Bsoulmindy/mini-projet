@@ -22,8 +22,10 @@ import io.jsonwebtoken.ExpiredJwtException;
  * Cette classe va être éxecuter pour chaque requête, elle vérifie si la requête a un JWT token valide.
  * S'il a un JWT token valide, elle va insérer l'authentification dans le context
  */
+
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends OncePerRequestFilter 
+{
 
 	@Autowired
 	private CompteDetailsServiceImpl compteDetails;
@@ -61,11 +63,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			// if token is valid configure Spring Security to manually set
 			// authentication
 			if (jwtTokenUtil.validateToken(token, userDetails)) {
-
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-						userDetails, null, userDetails.getAuthorities());
+					userDetails, null, userDetails.getAuthorities());
 				usernamePasswordAuthenticationToken
-						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+					.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				// After setting the Authentication in the context, we specify
 				// that the current user is authenticated. So it passes the
 				// Spring Security Configurations successfully.
