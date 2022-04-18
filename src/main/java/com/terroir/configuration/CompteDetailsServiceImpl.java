@@ -16,17 +16,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
+/**
+ * Une classe qui identifier un compte par son Username et Password
+ */
 @Service
 public class CompteDetailsServiceImpl implements UserDetailsService {
 
 
    @Autowired private CompteRepo CompteRepository;
 
-   public CompteDetailsServiceImpl(CompteRepo CompteRepository) {
-      this.CompteRepository = CompteRepository;
-   }
 
+
+   /**
+    * Méthode pour récupérer les informations d'un compte <code>UserDetails</code> par <code>username</code>
+    */
    @Override
    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
       Compte Compte = CompteRepository.getByUsername(userName);

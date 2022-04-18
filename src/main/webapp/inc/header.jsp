@@ -27,11 +27,6 @@
                         Déconnexion
                       </a>
                     </li>
-                    <li>
-                    <a href="/tracking">
-                      Suivre votre commande
-                    </a>
-                  </li>
                   </c:if>
                   <li>
                     <a href="/contact">
@@ -82,6 +77,28 @@
                     </li>
                     <li class='nav-item ${active == "Contact" ? "active" : ""}'>
                       <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                    <!-- Espace utilisateur/coopérative/admin -->
+                    <li class='nav-item submenu dropdown ${active == "Espace" ? "active" : ""}'>
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false">Espace</a>
+                      <ul class="dropdown-menu">
+                        <li class='nav-item'>
+                          <a class="nav-link" href="/tracking">Suivre votre commande</a>
+                        </li>
+                        <li class='nav-item'>
+                          <a class="nav-link" href="/gererProduits">Gérer mes produits</a>
+                        </li>
+                        <li class='nav-item'>
+                          <a class="nav-link" href="/suiviCommande">Suivre commandes clients</a>
+                        </li>
+                        <li class='nav-item'>
+                          <a class="nav-link" href="/admin/gererCooperatives">Gérer les coopératives</a>
+                        </li>
+                        <li class='nav-item'>
+                          <a class="nav-link" href="/admin/gererMatieresPremieres">Gérer les matières premières</a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </div>

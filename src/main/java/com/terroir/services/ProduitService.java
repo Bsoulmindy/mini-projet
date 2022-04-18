@@ -1,9 +1,12 @@
 package com.terroir.services;
 
 import com.terroir.entities.MatierePremiere;
+import com.terroir.entities.Origine;
 import com.terroir.entities.Produit;
 import com.terroir.entities.ProduitMatiereAsso;
+import com.terroir.entities.enumerations.Categorie;
 import com.terroir.repositories.MatiereRepo;
+import com.terroir.repositories.OrigineRepo;
 import com.terroir.repositories.ProduitRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,8 @@ public class ProduitService implements IProduitService {
 
     @Autowired
     MatiereRepo matiereRepo;
+
+    @Autowired OrigineRepo origineRepo;
 
     @Transactional
     public int addProduit(Produit pr, MatierePremiere... listMatiere) {
@@ -114,6 +119,40 @@ public class ProduitService implements IProduitService {
 				continue;
 			}
 		}
+        return produits;
+    }
+
+    public List<Produit> getAllProduits()
+    {
+        return produitRepo.findAll();
+    }
+
+    public List<Produit> getAllProduitsOfCategory(String CategorieString)
+    {
+        return produitRepo.getProduitsByCategorie(Categorie.fromString(CategorieString));
+    }
+
+    public List<Produit> getAllProduitsOfMatierePremiere(int idMatierePremiere)
+    {
+        List<Produit> produits = new ArrayList<>();
+        try {
+            MatierePremiere mp =  matiereRepo.findById(idMatierePremiere).get();
+            for (ProduitMatiereAsso asso : mp.getProduitMatieres()) {
+                produits.add(asso.getProduit());
+            }
+        } catch (Exception e) {}
+        return produits;
+    }
+
+    public List<Produit> getAllProduitsOfOrigine(int idOrigine)
+    {
+        List<Produit> produits = new ArrayList<>();
+        try {
+            Origine o =  origineRepo.findById(idOrigine).get();
+            for (ProduitMatiereAsso asso : o.getProduitMatieresAsso()) {
+                produits.add(asso.getProduit());
+            }
+        } catch (Exception e) {}
         return produits;
     }
 }

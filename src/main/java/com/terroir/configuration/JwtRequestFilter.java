@@ -37,20 +37,21 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		String token = null;
 		String username = null;
-		for (Cookie cookie : request.getCookies()) {
-			if(cookie.getName().compareTo("jwtToken") == 0)
-			{
-				token = cookie.getValue();
-				try {
-					username = jwtTokenUtil.getUsernameFromToken(cookie.getValue());
-				} catch (IllegalArgumentException e) {
-					System.out.println("Unable to get JWT Token");
-				} catch (ExpiredJwtException e) {
-					System.out.println("JWT Token has expired");
+		if(request.getCookies() != null)
+			for (Cookie cookie : request.getCookies()) {
+				if(cookie.getName().compareTo("jwtToken") == 0)
+				{
+					token = cookie.getValue();
+					try {
+						username = jwtTokenUtil.getUsernameFromToken(cookie.getValue());
+					} catch (IllegalArgumentException e) {
+						System.out.println("Unable to get JWT Token");
+					} catch (ExpiredJwtException e) {
+						System.out.println("JWT Token has expired");
+					}
+					break;
 				}
-				break;
 			}
-		}
 
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

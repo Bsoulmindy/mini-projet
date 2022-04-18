@@ -14,33 +14,8 @@
           <div class="col-lg-9">
             
             <div class="latest_product_inner">
-              <div class="row">
-                <c:forEach items="${ products }" var="product" varStatus="status">
-                <div class="col-lg-4 col-md-6">
-                  <div class="single-product">
-                    <div class="product-img">
-                      <img
-                        class="card-img"
-                        src="${ product.produit_image }"
-                        alt=""
-                      />
-                      <div class="p_icon">
-                        <a href="/produit?produit_id=${ product.produit_id }">
-                          <i class="ti-eye"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="product-btm">
-                      <a href="/produit?produit_id=${ product.produit_id }" class="d-block">
-                        <h4>${ product.produit_nom }</h4>
-                      </a>
-                      <div class="mt-3">
-                        <span class="mr-4">${ product.produit_prix }</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </c:forEach>
+              <div class="row" id="sectionProducts">
+                
               </div>
             </div>
           </div>
@@ -55,7 +30,7 @@
                   <ul class="list">
                     <c:forEach items="${ categories }" var="categorie" varStatus="status">
                     <li>
-                      <a href="/category?categorie=${ categorie }">${ categorie }</a>
+                      <a class="category" href="/category/get/category?categorie=${ categorie }">${ categorie }</a>
                     </li>
                     </c:forEach>
                   </ul>
@@ -70,7 +45,7 @@
                   <ul class="list">
                     <c:forEach items="${ matierePremieres }" var="matierePremiere" varStatus="status">
                     <li>
-                      <a href="/category?matierePremiere=${ matierePremiere }">${ matierePremiere }</a>
+                      <a class="matierePremiere" href="/category/get/matierePremiere?matierePremiere=${ matierePremiere.getMatiere_premiere_id() }">${ matierePremiere.getMatiere_premiere_nom() }</a>
                     </li>
                     </c:forEach>
                   </ul>
@@ -90,7 +65,7 @@
                       <ul class="list">
                         <c:forEach items="${ origines }" var="origine" varStatus="status">
                         <li>
-                          <a href="/category?origine=${ origine }">${ origine }</a>
+                          <a class="origine" href="/category/get/origine?origine=${ origine.getOrigine_id() }">${ origine.getOrigine_nom() }</a>
                         </li>
                         </c:forEach>
                       </ul>
@@ -104,5 +79,6 @@
     <!--================End Category Product Area =================-->
 
     <c:import url="/inc/footer.jsp"/>
+    <script src="inc/js/category.js"></script>
   </body>
 </html>

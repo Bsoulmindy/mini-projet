@@ -1,5 +1,7 @@
 package com.terroir.services;
 
+import java.util.List;
+
 import com.terroir.entities.MatierePremiere;
 import com.terroir.exception.MatiereDejaExist;
 import com.terroir.repositories.MatiereRepo;
@@ -25,5 +27,9 @@ public class MatierePremiereServie implements IMatierePremiereService {
             matiereRepo.save(matierePremiere);
         }
 
+    }
+
+    public List<MatierePremiere> getAllMatierePremieres() {
+        return matiereRepo.findAll();
     }
 }

@@ -257,7 +257,7 @@ ul {
     display: block;
     float: none;
     margin-right: 0px;
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid #444444;
     margin-left: 0px;
     transition: all 0.4s linear
 }

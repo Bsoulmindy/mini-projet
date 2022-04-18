@@ -2,6 +2,9 @@ package com.terroir.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.terroir.services.CategoryService;
+import com.terroir.services.MatierePremiereServie;
+import com.terroir.services.OrigineService;
 import com.terroir.services.ProduitService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +16,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 public class Index {
 	@Autowired ProduitService produitService;
+	@Autowired CategoryService categoryService;
+	@Autowired MatierePremiereServie matierePremiereServie;
+	@Autowired OrigineService origineService;
 	//TODO: tous doit avoir : active, authentified et personneNom
 	@GetMapping(path = "")
 	public String acceuil() { return "Accueil"; } //TODO: newProducts et popularProducts
 
-	@GetMapping(path = "category") //TODO : ?categorie, ?matierePremiere , ?origine
-	public String category() { return "Category"; } //TODO: products, categories, matierePremieres & origines
+	@GetMapping(path = "category")
+	public String category(Model model) {
+		model.addAttribute("products", produitService.getAllProduits());
+		model.addAttribute("categories", categoryService.getAllCategories());
+		model.addAttribute("matierePremieres", matierePremiereServie.getAllMatierePremieres());
+		model.addAttribute("origines", origineService.getAlOrigines());
+
+		return "Category"; 
+	} 
 
 	@GetMapping(path = "panier")
 	public String panier(HttpServletRequest request, Model model) {

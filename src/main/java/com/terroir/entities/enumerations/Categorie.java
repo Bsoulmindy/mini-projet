@@ -17,5 +17,14 @@ public enum Categorie {
 
 	public String getName() {
 		return this.name;
-	}    
+	}
+
+	public static Categorie fromString(String text) {
+		for (Categorie b : Categorie.values()) {
+		    if (b.name.equalsIgnoreCase(text)) {
+			return b;
+		    }
+		}
+		return null;
+	}
 }
