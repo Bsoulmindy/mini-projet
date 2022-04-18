@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Repository
 public interface CooperativeRepo extends JpaRepository<Cooperative, Integer> {
     
-    @Query("select * from Cooperative where cooperative_id = :cooperative_id")
+    @Query("from Cooperative as c where c.cooperative_id = :cooperative_id")
     Cooperative getCooperativeDesc(PathVariable cooperative_id);
 }

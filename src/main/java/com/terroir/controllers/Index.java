@@ -12,12 +12,13 @@ import com.terroir.entities.Cooperative;
 import com.terroir.entities.Produit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
  
-@RestController
+@Controller
 @RequestMapping("/")
 public class Index {
 	@Autowired ProduitService produitService;
@@ -85,5 +86,27 @@ public class Index {
 		return mav;
 	} //TODO : product
 
-	
+	@GetMapping(path = "gererProduits")
+	public String getPageGestionProduits()
+	{
+		return "gestionProduits";
+	}
+
+	@GetMapping(path = "suiviCommande")
+	public String getPageSuiviCommandes()
+	{
+		return "suiviCommandes";
+	}
+
+	@GetMapping(path = "admin/gererCooperatives")
+	public String getPageGestionCooperatives()
+	{
+		return "gestionCooperatives";
+	}
+
+	@GetMapping(path = "admin/gererMatieresPremieres")
+	public String getPageGestionMatieresPremieres()
+	{
+		return "gestionMatieresPremieres";
+	}
 }

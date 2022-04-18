@@ -20,19 +20,15 @@ public interface ProduitRepo extends JpaRepository<Produit, Integer> {
  
 
    // public List<commande_produit_asso> getCommande_produit();
-   @Query("select * from Produit ")
+   @Query("from Produit ")
    public List<Produit> getPopularProduits();
 
-   @Query("select * from Produit")
+   @Query("from Produit")
    public List<Produit> getNewProducts();
 
 
-   
-  public List<Produit> getProduitsByMPandOrigineandCategorie(PathVariable matierePremiere, PathVariable origine,
-                PathVariable categorie);
 
-
-@Query("select * from Produit where produit_id = :produit_id")
+@Query("from Produit as p where p.produit_id = :produit_id")
 public Produit getProduitDesc(PathVariable produit_id);
 
     @Query("select p from Produit as p where p.produit_categorie = :categorie")
