@@ -17,19 +17,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
- 
+ /**
+  * Controlleur standard des visiteur
+  */
 @Controller
 @RequestMapping("/")
-public class Index {
+public class IndexController {
 	@Autowired ProduitService produitService;
 	@Autowired CategoryService categoryService;
 	@Autowired MatierePremiereServie matierePremiereServie;
 	@Autowired OrigineService origineService;
-	//TODO: tous doit avoir : active, authentified et personneNom
+	//TODO: tous les controlleurs doivent avoir : active, authentified ,personneNom & role
 	@GetMapping(path = "")
 	public ModelAndView acceuil() { //TODO: newProducts et popularProducts
 		//récupérer l'instance popularProduit
-		ModelAndView mav = new ModelAndView("Acceuil");
+		ModelAndView mav = new ModelAndView("Accueil");
 		List<Produit> popularProduits = produitService.getPopularProduits();
 		mav.addObject("popularProduit",popularProduits);
 
@@ -84,12 +86,6 @@ public class Index {
         mav.addObject("produit", produit);
 		
 		return mav;
-	} //TODO : product
-
-	@GetMapping(path = "gererProduits")
-	public String getPageGestionProduits()
-	{
-		return "gestionProduits";
 	}
 
 	@GetMapping(path = "suiviCommande")

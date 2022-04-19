@@ -10,9 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Controlleur REST qui affiche les produits selon un critère
+ * <ul>
+ * <li> Par catégorie
+ * <li> Par matière première
+ * <li> Par origine
+ * </ul>
+ */
 @RestController
 @RequestMapping("/category/")
-public class CategoryController {
+public class ProduitsController {
 	@Autowired ProduitService produitService;
 
 	@GetMapping("get/all")

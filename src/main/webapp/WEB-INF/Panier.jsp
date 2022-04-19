@@ -64,7 +64,12 @@
                   <td>
                     <div class="checkout_btn_inner">
                       <a class="gray_btn" href="/magasin">Retour au magasin</a>
-                      <a class="main_btn" href="/achat">Acheter</a>
+                      <c:if test='${role == "user"}'>
+                        <a  class="main_btn" href="/user/achat">Acheter</a>
+                      </c:if>
+                      <c:if test='${role == null || role != "user"}'>
+                        <a role="link" aria-disabled="true" class="main_btn">Connecter pour continuer</a>
+                      </c:if>
                     </div>
                   </td>
                 </tr>
