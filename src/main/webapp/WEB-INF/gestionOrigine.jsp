@@ -7,15 +7,15 @@
   <body>
     <c:import url="/inc/header.jsp"/>
 
-        <c:import url="/inc/formGestionMP.jsp"/>
+        <c:import url="/inc/formGestionOrigine.jsp"/>
 
         <section class="cat_product_area section_gap">
             <div id="contenu">
-                <c:import url="/WEB-INF/contenu/gestionMPContenu.jsp"/>
+                <c:import url="/WEB-INF/contenu/gestionOrigineContenu.jsp"/>
             </div>
 
             <div class="d-flex justify-content-center my-2">
-                <button type="button" class="btn btn-success btn-ajouterMP">Ajouter un nouveau matière première</button>
+                <button type="button" class="btn btn-success btn-ajouterOrigine">Ajouter une nouvelle origine</button>
             </div>
         </section>
     
@@ -33,6 +33,6 @@
     <script src="/inc/vendors/counter-up/jquery.counterup.js"></script>
     <script src="/inc/js/mail-script.js"></script>
     <script src="/inc/js/theme.js"></script>
-    <script src="/inc/js/gestionMP.js"></script>
+    <script src="/inc/js/gestionOrigine.js"></script>
   </body>
 </html>

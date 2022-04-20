@@ -28,6 +28,13 @@
                       </a>
                     </li>
                   </c:if>
+                  <c:if test='${authentified != null && authentified && role == "User"}'>
+                    <li>
+                      <a href="/user/devenirCoop">
+                        Devenir un coopérative
+                      </a>
+                    </li>
+                  </c:if>
                   <li>
                     <a href="/contact">
                       Contacter-nous
@@ -44,7 +51,7 @@
           <nav class="navbar navbar-expand-lg navbar-light w-100">
             <!-- Brand and toggle get grouped for better mobile display -->
             <a class="navbar-brand logo_h" href="/">
-              <img src="inc/img/logo.png" alt="" />
+              <img src="/inc/img/logo.png" alt="" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +62,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
               <div class="row w-100 mr-0">
-                <div class="col-lg-7 pr-0">
+                <div class="col-lg-11 pr-0">
                   <ul class="nav navbar-nav center_nav pull-right">
                     <li class='nav-item ${active == "Accueil" ? "active" : ""}'>
                       <a class="nav-link" href="/">Accueil</a>
@@ -65,7 +72,7 @@
                         aria-haspopup="true" aria-expanded="false">Magasin</a>
                       <ul class="dropdown-menu">
                         <li class='nav-item ${active == "Category" ? "active" : ""}'>
-                          <a class="nav-link" href="/category">Catégories</a>
+                          <a class="nav-link" href="/produits">Catégories</a>
                         </li>
                         <li class='nav-item ${active == "Panier" ? "active" : ""}'>
                           <a class="nav-link" href="/panier">Panier</a>
@@ -83,27 +90,37 @@
                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-haspopup="true" aria-expanded="false">Espace</a>
                       <ul class="dropdown-menu">
-                        <li class='nav-item'>
-                          <a class="nav-link" href="/tracking">Suivre votre commande</a>
-                        </li>
-                        <li class='nav-item'>
-                          <a class="nav-link" href="/gererProduits">Gérer mes produits</a>
-                        </li>
-                        <li class='nav-item'>
-                          <a class="nav-link" href="/suiviCommande">Suivre commandes clients</a>
-                        </li>
-                        <li class='nav-item'>
-                          <a class="nav-link" href="/admin/gererCooperatives">Gérer les coopératives</a>
-                        </li>
-                        <li class='nav-item'>
-                          <a class="nav-link" href="/admin/gererMatieresPremieres">Gérer les matières premières</a>
-                        </li>
+                        <c:if test='${role == "User"}'>
+                          <li class='nav-item'>
+                            <a class="nav-link" href="/user/tracking">Suivre votre commande</a>
+                          </li>
+                        </c:if>
+                        <c:if test='${role == "Cooperative"}'>
+                          <li class='nav-item'>
+                            <a class="nav-link" href="/cooperative/gererProduits">Gérer mes produits</a>
+                          </li>
+                        </c:if>
+                        <c:if test='${role == "Cooperative"}'>
+                          <li class='nav-item'>
+                            <a class="nav-link" href="/cooperative/suiviCommande">Suivre commandes clients</a>
+                          </li>
+                        </c:if>
+                        <c:if test='${role == "Admin"}'>
+                          <li class='nav-item'>
+                            <a class="nav-link" href="/admin/gererCooperatives">Gérer les coopératives</a>
+                          </li>
+                        </c:if>
+                        <c:if test='${role == "Admin"}'>
+                          <li class='nav-item'>
+                            <a class="nav-link" href="/admin/gererMatieresPremieres">Gérer les matières premières</a>
+                          </li>
+                        </c:if>
                       </ul>
                     </li>
                   </ul>
                 </div>
 
-                <div class="col-lg-5 pr-0">
+                <div class="col-lg-1 pr-0">
                   <ul class="nav navbar-nav navbar-right right_nav pull-right">
                   <c:if test="${authentified != null || authentified}">
                     <li class="nav-item" style="font: 400 16px/80px Heebo, sans-serif;">
