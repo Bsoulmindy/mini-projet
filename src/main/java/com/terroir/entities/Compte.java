@@ -20,7 +20,7 @@ public class Compte {
 
     private boolean isAdmin;
 
-
+    //private String coopName;
 
     @OneToOne(mappedBy = "compte")
     private Personne personne;

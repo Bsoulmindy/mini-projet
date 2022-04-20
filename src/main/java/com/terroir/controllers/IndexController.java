@@ -79,8 +79,8 @@ public class IndexController {
 		  
 	} // TODO : cooperative
 
-	@GetMapping(path = "produit") //TODO : ?produit_id
-	public ModelAndView produit(PathVariable produit_id)  { 
+	@GetMapping(path = "produit/{produit_id}") //TODO : ?produit_id
+	public ModelAndView produit(@PathVariable("produit_id") int produit_id)   { 
 	  	ModelAndView mav = new ModelAndView("Produit");
 		Produit produit = produitService.getProduitDesc( produit_id);
         mav.addObject("produit", produit);

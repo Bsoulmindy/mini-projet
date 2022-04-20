@@ -146,16 +146,27 @@ public class ProduitService implements IProduitService {
         return produits;
     }
 
+    /**
+     *  Récupére list de toutes les Produits
+     *  @return List<Produit>
+     */
     public List<Produit> getAllProduits()
     {
         return produitRepo.findAll();
     }
-
+    /**
+     * Récupére list de toutes les Produits par leur catégorie
+     * @param categorie
+     * @return List<Produit>
+     */
     public List<Produit> getAllProduitsOfCategory(String CategorieString)
     {
         return produitRepo.getProduitsByCategorie(Categorie.fromString(CategorieString));
     }
 
+    /**
+     * Récupére list de toutes les Produits par une matiéresPremiere
+     */
     public List<Produit> getAllProduitsOfMatierePremiere(int idMatierePremiere)
     {
         List<Produit> produits = new ArrayList<>();
@@ -168,6 +179,21 @@ public class ProduitService implements IProduitService {
         return produits;
     }
 
+   /*  //getAllProduitsOfListMatierePremiere
+    public List<Produit> getAllProduitsOfListMatierePremiere(List<MatierePremiere> listMatierePremiere){
+    
+        List<Produit> produits = new ArrayList<>();
+        for (MatierePremiere mp : listMatierePremiere) {
+            for (ProduitMatiereAsso asso : mp.getProduitMatieres()) {
+                produits.add(asso.getProduit());
+            }
+        }
+        return produits;
+    } */
+    
+    /**
+     * Récupére list de toutes les Produits par une origine
+     */
     public List<Produit> getAllProduitsOfOrigine(int idOrigine)
     {
         List<Produit> produits = new ArrayList<>();
@@ -192,22 +218,12 @@ public class ProduitService implements IProduitService {
     public List<Produit> getNewProducts() {
         return produitRepo.findAll();
     }
+    
+    
 
-
-    public List<Produit> getProduitsByMPandOrigineandCategorie(PathVariable matierePremiere, PathVariable origine,
-            PathVariable categorie) {
-        List<Produit> produits = produitRepo.findAll();
-        List<Produit> produitsTrouvees = new ArrayList<>();
-        for(Produit produit : produits) {
-            if(matierePremiere != null && matierePremiere.toString() !=  ""  /*&& produit*/) { //TODO : À vérifier
-                produitsTrouvees.add(produit);
-            }
-        }
-
-        return produitsTrouvees; //TODO : À vérifier
-    }
-
-
+    /**
+     * Récupére list de toutes les Cooperatives par region et par secteur
+     */
     public List<Cooperative> getCooperativesbyRegionandSecteur(PathVariable region, PathVariable secteur) {
         List<Cooperative> cooperatives = cooperativeRepo.findAll();
         List<Cooperative> cooperativesTrouvees = new ArrayList<>();

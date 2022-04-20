@@ -29,7 +29,7 @@ public interface ProduitRepo extends JpaRepository<Produit, Integer> {
 
 
 @Query("from Produit as p where p.produit_id = :produit_id")
-public Produit getProduitDesc(PathVariable produit_id);
+public Produit getProduitDesc(int produit_id);
 
     @Query("select p from Produit as p where p.produit_categorie = :categorie")
     public List<Produit> getProduitsByCategorie(@Param("categorie") Categorie categorie);
