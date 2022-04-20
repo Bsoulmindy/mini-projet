@@ -24,12 +24,12 @@ public class ProduitMatiereAsso {
     @ManyToOne(cascade = { CascadeType.ALL })
     @MapsId("produit_idref")
     @JoinColumn(name = "produit_idref")
-    Produit produit;
+    private Produit produit;
 
     @ManyToOne(cascade = { CascadeType.ALL })
     @MapsId("matiere_premiere_idref")
     @JoinColumn(name = "matiere_premiere_idref")
-    MatierePremiere matierePremiere;
+    private MatierePremiere matierePremiere;
 
     @ManyToOne
     @JoinColumn(name = "origine_idref")

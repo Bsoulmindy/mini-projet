@@ -1,12 +1,24 @@
 package com.terroir.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+
 import com.terroir.configuration.CompteDetailsServiceImpl;
 import com.terroir.configuration.JwtRequest;
+import com.terroir.entities.Commande;
+import com.terroir.entities.CommandeProduitAsso;
+import com.terroir.entities.CommandeProduitKey;
 import com.terroir.entities.Compte;
 import com.terroir.entities.Personne;
+import com.terroir.entities.Produit;
 import com.terroir.entities.form.RegisterCompteForm;
+import com.terroir.repositories.CommandeProduitAssoRepo;
+import com.terroir.repositories.CommandeRepo;
 import com.terroir.repositories.CompteRepo;
 import com.terroir.repositories.PersonneRepo;
+import com.terroir.repositories.ProduitRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +32,9 @@ import org.springframework.stereotype.Service;
 public class CompteService {
 	@Autowired CompteRepo compteRepo;
 	@Autowired PersonneRepo personneRepo;
+    @Autowired ProduitRepo produitRepo;
+    @Autowired CommandeRepo commandeRepo;
+    @Autowired CommandeProduitAssoRepo commandeProduitAssoRepo;
 	@Autowired PasswordEncoder passwordEncoder;
     @Autowired CompteDetailsServiceImpl compteDetailsService;
     @Autowired AuthenticationManager authenticationManager;
@@ -93,5 +108,57 @@ public class CompteService {
             compte = compteRepo.getByUsername(username);
         }
         return compte;
+    }
+
+    public Personne recupererPersonneActuel() {
+        return recupererCompteActuel().getPersonne();
+    }
+
+    /**
+     * Recuperer les commandes de l'utilisateur actuel
+     */
+    public List<Commande> getAllCommandesOfUser()
+    {
+        return recupererCompteActuel().getCommandes();
+    }
+
+    /**
+     * Acheter en se basant sur les cookies
+     * @param cookies = {idProduit , Qté}
+     */
+    public void acheter(Cookie[] cookies)
+    {
+        Commande commande = new Commande();
+        commande.setCommande_is_delivre(false);
+        float prixTotal = 0;
+        List<CommandeProduitAsso> assos = new ArrayList<>();
+
+        for (Cookie cookie : cookies) {
+            try {
+                Produit p = produitRepo.findById(Integer.valueOf(cookie.getName())).get();
+                prixTotal += p.getProduit_prix() * Integer.valueOf(cookie.getValue());
+                CommandeProduitAsso asso = new CommandeProduitAsso();
+                asso.setCommande(commande);
+                asso.setProduit(p);
+                asso.setQuantite(Integer.valueOf(cookie.getValue()));
+
+                assos.add(asso);
+            } catch (Exception e) {
+                continue; //Rien à faire si le cookie correspond à autre chose comme Session par example
+            }
+        }
+
+        commande.setCommande_prix_total(prixTotal);
+        commande.setCompte(recupererCompteActuel());
+
+        commande = commandeRepo.save(commande);
+
+        for (CommandeProduitAsso asso : assos) {
+            CommandeProduitKey key = new CommandeProduitKey(asso.getProduit().getProduit_id(), commande.getCommande_id());
+
+            asso.setIdref(key);
+
+            commandeProduitAssoRepo.save(asso);
+        }
     }
 }

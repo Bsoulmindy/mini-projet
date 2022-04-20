@@ -32,6 +32,10 @@ function getContenu()
 			$('.btn-supprimerProduit').on('click' ,function(e){
 				supprimerProduit($(this).attr('value'));
 			});
+			$('.btn-associerProduit').on('click' ,function(e){
+				$('.js-associerProduit-form').toggleClass('is-shown--off-flow').toggleClass('is-hidden--off-flow');
+				$('#idProduit2').attr('value', $(this).attr('value'));
+			});
 		}
             
 	}
@@ -52,6 +56,8 @@ function ajouterProduit(event) {
 	// Traitement des données
 	const divLoading = '<img src="/inc/images/loader.gif">';
 	const divTimeout = '<div class="alert alert-danger" role="alert">Connexion échoué avec le serveur, veuillez réssayer! </div>';
+
+	if(image.files.length == 0) newProduitMessage.innerHTML = '<div class="alert alert-danger" role="alert">Image est obligatoire</div>';
 
     let produitForm = new FormData();
     produitForm.append("nom", nom.value);
@@ -74,7 +80,7 @@ function ajouterProduit(event) {
             getContenu();
             $('.js-ajouterProduit-form').toggleClass('is-shown--off-flow').toggleClass('is-hidden--off-flow');
         }
-		if(xhr.status > 500)
+		if(xhr.status == 400)
 			newProduitMessage.innerHTML = '<div class="alert alert-danger" role="alert">'+ xhr.responseText + '</div>';
 		if(xhr.status > 400)
 			newProduitMessage.innerHTML = divTimeout;
@@ -120,7 +126,7 @@ function modifierProduit(event) {
             getContenu();
             $('.js-ajouterProduit-form').toggleClass('is-shown--off-flow').toggleClass('is-hidden--off-flow');
         }
-		if(xhr.status > 500)
+		if(xhr.status == 400)
 			modifierProduitMessage.innerHTML = '<div class="alert alert-danger" role="alert">'+ xhr.responseText + '</div>';
 		if(xhr.status > 400)
 			modifierProduitMessage.innerHTML = divTimeout;
@@ -142,6 +148,47 @@ function supprimerProduit(id)
         }
 	}
 	xhr.send(id);
+}
+
+function associerProduit(event) {
+	event.preventDefault()
+	event.stopPropagation()
+    const MP = document.getElementById("newProduitMatierePremiere");
+	const origine = document.getElementById("newProduitOrigine");
+	const idProduit = document.getElementById("idProduit2");
+
+
+	const newProduitMessage = document.getElementById("associerProduitMessage");
+
+	// Traitement des données
+	const divLoading = '<img src="/inc/images/loader.gif">';
+	const divTimeout = '<div class="alert alert-danger" role="alert">Connexion échoué avec le serveur, veuillez réssayer! </div>';
+
+    let produitForm = new FormData();
+    produitForm.append("idMatierePremiere", MP.value);
+	produitForm.append("idOrigine", origine.value);
+	produitForm.append("idProduit", idProduit.value);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/cooperative/produit/associate');
+	xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-type", "application/json");
+	xhr.timeout = 10000;
+	xhr.ontimeout = function () {
+        newProduitMessage.innerHTML = divTimeout;
+    };
+	xhr.onload = function () {
+		if(xhr.status == 200)
+        {
+            getContenu();
+            $('.js-ajouterProduit-form').toggleClass('is-shown--off-flow').toggleClass('is-hidden--off-flow');
+        }
+		if(xhr.status == 400)
+			newProduitMessage.innerHTML = '<div class="alert alert-danger" role="alert">'+ xhr.responseText + '</div>';
+		if(xhr.status > 400)
+			newProduitMessage.innerHTML = divTimeout;
+	}
+	xhr.send(produitForm);
 }
 
 function toggleCommande(checkbox)

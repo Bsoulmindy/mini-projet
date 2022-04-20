@@ -2,7 +2,12 @@ package com.terroir.controllers;
 
 import com.terroir.dto.newProductForm;
 import com.terroir.dto.updateProductForm;
+import com.terroir.exception.FormException;
+import com.terroir.services.CooperativeService;
+import com.terroir.services.MatierePremiereServie;
+import com.terroir.services.OrigineService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +23,28 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/cooperative/")
 public class CooperativeController {
+    @Autowired CooperativeService cooperativeService;
+    @Autowired MatierePremiereServie matierePremiereServie;
+    @Autowired OrigineService origineService;
 	
 	@GetMapping("suiviCommandes")
-	public ModelAndView suiviCommandes() { //TODO : commandes
-		
-		return new ModelAndView("suiviCommandes");
+	public ModelAndView suiviCommandes() {
+		ModelAndView model = new ModelAndView("suiviCommandes");
+        model.addObject("commandes", cooperativeService.getCommandesOfCooperative());
+		return model;
 	}
 
+    /**
+     * Formulaire afin d'ajouter, modifier ou supprimer un produit
+     */
     @GetMapping(path = "gererProduits")
-	public String getPageGestionProduits()
+	public ModelAndView getPageGestionProduits()
 	{
-		return "gestionProduits";
+        ModelAndView model = new ModelAndView("gestionProduits");
+        model.addObject("products", cooperativeService.getProduitsOfCooperative());
+        model.addObject("matierePremieres", matierePremiereServie.getAllMatierePremieres());
+        model.addObject("origines", origineService.getAlOrigines());
+		return model;
 	}
 
 	/**
@@ -39,44 +55,75 @@ public class CooperativeController {
 	 */
 	@PostMapping("commande/toggle") 
 	public void toggleCommande(int idCommande, boolean toggle) {
-		//TODO
+		cooperativeService.toggleCommande(idCommande, toggle);
 	}
 
 	/**
-     * TODO : Ajouter un nouveau produit en l'associant avec le coopérative actuel (connecté)
+     * Ajouter un nouveau produit en l'associant avec le coopérative actuel (connecté)
      */
-    @PostMapping("new")
+    @PostMapping("produit/new")
     public ResponseEntity<String> ajouterProduit(@RequestBody newProductForm form) {
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur");
+        
+        try {
+            cooperativeService.ajouterProduit(form);
+        } catch (FormException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        
+        return ResponseEntity.status(HttpStatus.OK).body("Produit ajouté!");
     }
 
     /**
-     * TODO : Modifier le produit en l'associant avec le coopérative actuel (connecté)
+     * Modifier le produit en changement seulement les attributs indiqués
      */
-    @PostMapping("update")
+    @PostMapping("produit/update")
     public ResponseEntity<String> modifierProduit(@RequestBody updateProductForm form) {
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur");
+        try {
+            cooperativeService.updateProduit(form);
+        } catch (FormException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        
+        return ResponseEntity.status(HttpStatus.OK).body("Produit modifié!");
     }
 
     /**
-     * TODO : Ajouter un nouveau produit en l'associant avec le coopérative actuel (connecté)
+     * Supprimer le produit
      */
-    @PostMapping("delete")
+    @PostMapping("produit/delete")
     public ResponseEntity<String> deleteProduit(@RequestBody int id) {
+        try {
+            cooperativeService.deleteProduit(id);
+        } catch (FormException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        
+        return ResponseEntity.status(HttpStatus.OK).body("Produit supprimé!");
+    }
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur");
+    /**
+     * Associer le produit
+     */
+    @PostMapping("produit/associate")
+    public ResponseEntity<String> associerProduit(int idProduit, int idMatierePremiere, int idOrigine) {
+        try {
+            cooperativeService.associerProduit(idProduit, idMatierePremiere, idOrigine);
+        } catch (FormException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Produit associé!");
     }
 
     /**
      * Récupérer tous les produits que le coopérative actuel (connecté) possède
      * @return
      */
-    @GetMapping("getAll")
+    @GetMapping("produit/getAll")
     public ModelAndView getAllProduits() {
         ModelAndView model = new ModelAndView("contenu/gestionProduitsContenu");
-        //TODO
+        model.addObject("products", cooperativeService.getProduitsOfCooperative());
         return model;
     }
 }

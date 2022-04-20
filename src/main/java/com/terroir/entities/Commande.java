@@ -20,7 +20,10 @@ public class Commande {
     
 
     // LES METHODES
-    @ManyToMany
-    @JoinTable(name = "CommandeProduitAsso", joinColumns = @JoinColumn(name = "commande_idref"), inverseJoinColumns = @JoinColumn(name = "produit_idref"))
-    private List<Produit> produits;
+    @OneToMany(mappedBy = "commande")
+    private List<CommandeProduitAsso> commandeProduitAssos;
+
+    @ManyToOne
+    @JoinColumn(name = "compte_idref")
+    private Compte compte;
 }

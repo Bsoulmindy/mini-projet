@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Origine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int origine_id;
+    @Column(unique = true)
     private String origine_nom;
 
     // LES METHODES

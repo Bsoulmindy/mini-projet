@@ -1,5 +1,7 @@
 package com.terroir.entities;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.Data;
@@ -22,4 +24,7 @@ public class Compte {
 
     @OneToOne(mappedBy = "compte")
     private Personne personne;
+
+    @OneToMany(mappedBy = "compte")
+    private List<Commande> commandes;
 }
