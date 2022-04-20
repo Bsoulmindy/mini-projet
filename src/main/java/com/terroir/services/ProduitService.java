@@ -190,7 +190,7 @@ public class ProduitService implements IProduitService {
         }
         return produits;
     } */
-    
+
     /**
      * Récupére list de toutes les Produits par une origine
      */
@@ -242,7 +242,7 @@ public class ProduitService implements IProduitService {
     }
 
 
-    public Produit getProduitDesc(PathVariable produit_id) {
+    public Produit getProduitDesc(int produit_id) {
         return produitRepo.getProduitDesc(produit_id);
     }
 }

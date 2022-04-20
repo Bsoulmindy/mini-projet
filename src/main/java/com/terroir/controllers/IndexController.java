@@ -27,6 +27,7 @@ public class IndexController {
 	@Autowired CategoryService categoryService;
 	@Autowired MatierePremiereServie matierePremiereServie;
 	@Autowired OrigineService origineService;
+	
 	//TODO: tous les controlleurs doivent avoir : active, authentified ,personneNom & role
 	@GetMapping(path = "")
 	public ModelAndView acceuil() { //TODO: newProducts et popularProducts

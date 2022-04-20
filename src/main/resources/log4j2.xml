@@ -9,6 +9,11 @@
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
         </File>
+        <File name="PopularProducts" fileName="logs/popular.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
     </Appenders>
     <Loggers>
         <Logger name="com.terroir" level="debug" additivity="false">
@@ -18,6 +23,10 @@
         <Logger name="org.springframework.boot" level="error" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
+        <Logger name="produit" level="info" additivity="false">
+        <AppenderRef ref="PopularProducts"/>
+        </Logger>
+
         <Root level="info">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
