@@ -50,7 +50,7 @@ function ajouterOrigine(event) {
             getContenu();
             $('.js-ajouterOrigine-form').toggleClass('is-shown--off-flow').toggleClass('is-hidden--off-flow');
         }
-		if(xhr.status > 500)
+		if(xhr.status == 400)
 			newOrigineMessage.innerHTML = '<div class="alert alert-danger" role="alert">'+ xhr.responseText + '</div>';
 		if(xhr.status > 400)
 			newOrigineMessage.innerHTML = divTimeout;

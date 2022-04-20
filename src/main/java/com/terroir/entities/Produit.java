@@ -48,6 +48,6 @@ public class Produit {
     @JoinColumn(name = "cooperative_idref")
     private Cooperative cooperative;
 
- @ManyToMany(mappedBy = "produits")
-    private List<Commande> commandes; 
+    @OneToMany(mappedBy = "produit")
+    private List<CommandeProduitAsso> commandeProduitAssos;
 }

@@ -16,8 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/")
 public class AdminController {
     
-    @Autowired
-    AdminService  adminService;
+    @Autowired AdminService  adminService;
 
     /**
      * Accepter (ou refuser) une demande d'être coopérative
@@ -27,20 +26,28 @@ public class AdminController {
     @PostMapping("gererDemandeCoop")
     public void gererDemandeCoop(int idCooperative, boolean isAccepted)
     {
-        //TODO
+        adminService.gererDemandeCoop(idCooperative, isAccepted);
     }
 
+    /**
+     * Afficher tous les demandes coopératives qui ne sont pas encore approuvés
+     */
     @GetMapping("getDemandesCooperatives")
-    public ModelAndView getDemandesCooperatives() //TODO : demandeCooperatives
+    public ModelAndView getDemandesCooperatives()
     {
         ModelAndView model = new ModelAndView("contenu/gestionCooperativesContenu");
+        model.addObject("demandeCooperatives", adminService.getDemandeCooperatives());
         return model;
     }
 
+    /**
+     * Afficher tous les matières premières actuel dans la BD
+     */
     @GetMapping("getAllMP")
-    public ModelAndView getAllMP() //TODO : matierePremieres
+    public ModelAndView getAllMP()
     {
         ModelAndView model = new ModelAndView("contenu/gestionMPContenu");
+        model.addObject("matierePremieres", adminService.getAllMatierePremieres());
         return model;
     }
 
@@ -51,13 +58,14 @@ public class AdminController {
     @PostMapping("newMP")
     public void newMP(String nom)
     {
-        //TODO
+        adminService.creerMatierePremiere(nom);
     }
 
     @GetMapping("getAllOrigine")
-    public ModelAndView getAllOrigine() //TODO : origines
+    public ModelAndView getAllOrigine()
     {
         ModelAndView model = new ModelAndView("contenu/gestionOrigineContenu");
+        model.addObject("origines", adminService.getAllOrigines());
         return model;
     }
 
@@ -68,6 +76,6 @@ public class AdminController {
     @PostMapping("newOrigine")
     public void newOrigine(String nom)
     {
-        //TODO
+        adminService.creerOrigine(nom);
     }
 }

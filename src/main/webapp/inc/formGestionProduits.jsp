@@ -171,17 +171,17 @@
 
                                     <div class="d-flex justify-content-center">
                                         <div class="" style="width: 100%; margin: 5px;">
-                                            <label for="newProduitUnite" class="form-label auth-label">Unité</label>
+                                            <label for="modifierProduitUnite" class="form-label auth-label">Unité</label>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="" style="width: 100%; margin: 5px;">
-                                            <select class="form-control auth-input" id="newProduitUnite" required>
+                                            <select class="form-control auth-input" id="modifierProduitUnite" required>
                                                 <c:forEach items="${ unites }" var="unite" varStatus="status">
                                                     <option value="${unite}">${unite}</option>
                                                 </c:forEach>
                                             </select>
-                                            <div class="invalid-feedback" id="newProduitUniteInvalid">
+                                            <div class="invalid-feedback" id="modifierProduitUniteInvalid">
                                                 
                                             </div>
                                         </div>
@@ -189,17 +189,17 @@
 
                                     <div class="d-flex justify-content-center">
                                         <div class="" style="width: 100%; margin: 5px;">
-                                            <label for="newProduitCategorie" class="form-label auth-label">Catégorie</label>
+                                            <label for="modifierProduitCategorie" class="form-label auth-label">Catégorie</label>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="" style="width: 100%; margin: 5px;">
-                                            <select class="form-control auth-input" id="newProduitCategorie" required>
+                                            <select class="form-control auth-input" id="modifierProduitCategorie" required>
                                                 <c:forEach items="${ categories }" var="categorie" varStatus="status">
                                                     <option value="${categorie}">${categorie}</option>
                                                 </c:forEach>
                                             </select>
-                                            <div class="invalid-feedback" id="newProduitCategorieInvalid">
+                                            <div class="invalid-feedback" id="modifierProduitCategorieInvalid">
                                                 
                                             </div>
                                         </div>
@@ -207,13 +207,13 @@
 
                                     <div class="d-flex justify-content-center">
                                         <div class="" style="width: 100%; margin: 5px;">
-                                            <label for="newProduitImage" class="form-label auth-label">Image</label>
+                                            <label for="modifierProduitImage" class="form-label auth-label">Image</label>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-start">
                                         <div class="" style="width: 100%; margin: 5px;color: rgb(121,121,121)">
-                                            <input type="file" class="" id="newProduitImage" required>
-                                            <div class="invalid-feedback" id="newProduitInvalid">
+                                            <input type="file" class="" id="modifierProduitImage" required>
+                                            <div class="invalid-feedback" id="modifierProduitInvalid">
                                                 Image doit être en format .png ou .jpg, et ne doit pas dépassé 1Mo
                                             </div>
                                         </div>
@@ -222,6 +222,84 @@
                                     <div class="row">
                                         <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-center login_option">
                                             <button type="submit" class="btn btn-default login_btn" onClick="modifierProduit(event)">Modifier le produit</button>
+                                        </div> 
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+
+
+
+
+<section class="login_signup_option">
+    <div class="l-modal is-hidden--off-flow js-associerProduit-form">
+        <div class="l-modal__shadow js-associerProduit-hide"></div>
+        <div class="login_popup login_modal_body">
+            <div class="Popup_title d-flex justify-content-between">
+                <h2 class="hidden">&nbsp;</h2>
+                <!-- Nav tabs -->
+                <div class="row" style="margin: 0px;width: 100%;">
+                    
+                    
+                    <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                        <!-- Tab panels -->
+                        <div class="tab-content card">
+                            <!--Panel-->
+                            <div class="tab-pane fade show active" id="panelProduit" role="tabpanel">
+                                <form action="#" class="associerProduit needs-validation" id="formProduit">
+                                    <input type="hidden" id="idProduit2" value="">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="mt-2" id="associerProduitMessage">
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-center">
+                                        <div class="" style="width: 100%; margin: 5px;">
+                                            <label for="newProduitMatierePremiere" class="form-label auth-label">Matière première</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="" style="width: 100%; margin: 5px;">
+                                            <select class="form-control auth-input" id="newProduitMatierePremiere" required>
+                                                <c:forEach items="${ matierePremieres }" var="matierePremiere" varStatus="status">
+                                                    <option value="${matierePremiere.matiere_premiere_id}">${matierePremiere.matiere_premiere_nom}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <div class="invalid-feedback" id="newProduitMatierePremiereInvalid">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <div class="" style="width: 100%; margin: 5px;">
+                                            <label for="newProduitOrigine" class="form-label auth-label">Origine</label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="" style="width: 100%; margin: 5px;">
+                                            <select class="form-control auth-input" id="newProduitOrigine" required>
+                                                <c:forEach items="${ origines }" var="origine" varStatus="status">
+                                                    <option value="${origine.origine_id}">${origine.origine_nom}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <div class="invalid-feedback" id="newProduitOrigineInvalid">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-center login_option">
+                                            <button type="submit" class="btn btn-default login_btn" onClick="associerProduit(event)">Associer</button>
                                         </div> 
                                     </div>
                                 </form>

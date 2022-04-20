@@ -43,14 +43,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex flex-row justify-content-center my-2" id="statusDiv">
-                        <c:if test="${errors}">
+                        <c:if test="${error}">
                             <div class="d-flex flex-row justify-content-center my-2">
                                 <div class="alert alert-danger" role="alert">
-                                    <ul>
-                                        <c:forEach items="${errors}" var="error">
-                                            <li>${error}</li>
-                                        </c:forEach>
-                                    </ul>
+                                    ${error}
                                 </div>
                             </div>
                         </c:if>

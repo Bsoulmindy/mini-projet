@@ -11,7 +11,7 @@
 
         <section class="cat_product_area section_gap">
             <div id="contenu">
-                <c:import url="/WEB-INF/contenu/gestionProduitsContenu.jsp"/>
+                <%-- <c:import url="/WEB-INF/contenu/gestionProduitsContenu.jsp"/> --%>
             </div>
 
             <div class="d-flex justify-content-center my-2">
