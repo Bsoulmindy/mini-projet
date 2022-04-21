@@ -45,7 +45,7 @@ public class CompteService {
         Compte compte = new Compte();
         compte.setCompte_username(compteForm.getUsername());
         compte.setCompte_password(passwordEncoder.encode(compteForm.getPassword()));
-	compte.setAdmin(isAdmin);
+	    compte.setAdmin(isAdmin);
 
 
             Personne personne = new Personne();

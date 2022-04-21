@@ -191,7 +191,7 @@ public class ProduitService implements IProduitService {
         }
         return produits;
     } */
-    
+
     /**
      * Récupére list de toutes les Produits par une origine
      */
