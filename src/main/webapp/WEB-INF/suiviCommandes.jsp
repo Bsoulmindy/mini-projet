@@ -7,23 +7,41 @@
   <body>
     <c:import url="/inc/header.jsp"/>
 
+    <div class="d-flex justify-content-center my-2">
+          <h1>Suivi des commandes clients</h1>
+    </div>
+
     <section class="cat_product_area section_gap">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col" width="10%">ID</th>
-                    <th scope="col" width="30%">Nom du personne</th>
-                    <th scope="col" width="20%">Prix total</th>
+                    <th scope="col" width="20%">Nom du personne</th>
+                    <th scope="col" width="20%">Produits commandés</th>
+                    <th scope="col" width="20%">Quantité</th>
+                    <th scope="col" width="10%">Prix total</th>
                     <th scope="col" width="20%">Est délivré?</th>
-                    <th scope="col" width="20%"></th> <!-- Délivrer -->
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${ commandes }" var="commande" varStatus="status">
                     <td>${commande.commande_id}</td>
-                    <%-- <td>${nomPersonne[status.index - 1]}</td> --%>
                     <td>${commande.getCompte().getPersonne().getPersonne_nom()}</td>
-                    <td>${commande.commande_prix_total}</td>
+                    <td>
+                        <ul>
+                        <c:forEach items="${ commande.getCommandeProduitAssos() }" var="cpa">
+                            <li>${cpa.getProduit().getProduit_nom()}</li>
+                        </c:forEach>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                        <c:forEach items="${ commande.getCommandeProduitAssos() }" var="cpa">
+                            <li>${cpa.getQuantite()}</li>
+                        </c:forEach>
+                        </ul>
+                    </td>
+                    <td>${commande.commande_prix_total} DH</td>
                     <td><input class="btn-toggleCommande" type="checkbox" idCommande="${commande.commande_id}" ${commande.commande_is_delivre ? 'checked' : ''}></td>
                 </c:forEach>
             </tbody>

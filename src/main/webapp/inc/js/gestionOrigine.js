@@ -10,8 +10,6 @@ function getContenu()
 {
     var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/admin/getAllOrigine');
-	xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-type", "application/json");
 	xhr.timeout = 10000;
 	xhr.onload = function () {
 		if(xhr.status == 200)
@@ -26,7 +24,7 @@ function getContenu()
 function ajouterOrigine(event) {
 	event.preventDefault()
 	event.stopPropagation()
-	const nom = document.getElementById("newOrigineNom");
+	const nom = document.getElementById("ajouterOrigineNom");
 
 	const newOrigineMessage = document.getElementById("newOrigineMessage");
 
@@ -38,8 +36,6 @@ function ajouterOrigine(event) {
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/admin/newOrigine');
-	xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-type", "application/json");
 	xhr.timeout = 10000;
 	xhr.ontimeout = function () {
         newOrigineMessage.innerHTML = divTimeout;

@@ -22,7 +22,7 @@
                   <h5 style="display: inline-block;width: 140px;">Origine</h5> : ${cooperative.getOrigine().origine_nom}
                 </li>
                 <li>
-                  <h5 style="display: inline-block;width: 140px;">Secteur d'activité</h5> : ${cooperative.cooperative_secteurActivite}
+                  <h5 style="display: inline-block;width: 140px;">Secteur d'activité</h5> : ${cooperative.cooperative_secteur_activite}
                 </li>
               </ul>
               </div>

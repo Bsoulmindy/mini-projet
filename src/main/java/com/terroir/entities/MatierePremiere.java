@@ -19,7 +19,7 @@ public class MatierePremiere {
     private String matiere_premiere_nom;
 
     // LES METHODES
-    @OneToMany(mappedBy = "matierePremiere", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "matierePremiere", fetch = FetchType.EAGER)
     @Builder.Default
     List<ProduitMatiereAsso> produitMatieres = new ArrayList<ProduitMatiereAsso>();
 

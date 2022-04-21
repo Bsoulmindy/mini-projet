@@ -10,17 +10,17 @@
         alt=""
         />
         <div class="p_icon">
-        <a href="/produit?produit_id=${ product.produit_id }">
+        <a href="/produit/${ product.produit_id }">
             <i class="ti-eye"></i>
         </a>
         </div>
     </div>
     <div class="product-btm">
-        <a href="/produit?produit_id=${ product.produit_id }" class="d-block">
-        <h4>${ product.produit_nom }</h4>
+        <a href="/produit/${ product.produit_id }" class="d-block">
+        <h4 style="text-align: center">${ product.produit_nom }</h4>
         </a>
-        <div class="mt-3">
-        <span class="mr-4">${ product.produit_prix }</span>
+        <div class="mt-3" style="text-align: center">
+        <span class="mr-4">${ product.produit_prix } DH</span>
         </div>
     </div>
     </div>

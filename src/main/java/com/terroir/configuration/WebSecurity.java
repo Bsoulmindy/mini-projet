@@ -57,8 +57,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
       .csrf().disable()
       // autoriser
       .authorizeRequests()
-      .antMatchers("/tracking").hasAuthority("User")
-      .antMatchers("/Admin/**").hasAuthority("Admin")
+      .antMatchers("/user/**").hasAuthority("User")
+      .antMatchers("/cooperative/**").hasAuthority("Cooperative")
+      .antMatchers("/admin/**").hasAuthority("Admin")
       .anyRequest().permitAll()
       // Politique par défaut pour un client non autorisé
       .and().exceptionHandling()
@@ -71,6 +72,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
       // Pourqoui? pour s'authentifier un client posséde le token directement
       // sans passer à <code>UsernamePasswordAuthenticationFilter</code>
 		http.addFilterBefore(jwtRequestFilter, 
-		UsernamePasswordAuthenticationFilter.class);
+		UsernamePasswordAuthenticationFilter.class)
+      .logout().logoutUrl("/deconnexion")
+      .deleteCookies("jwtToken")
+      .clearAuthentication(true)
+      .logoutSuccessUrl("/");
    }
 }

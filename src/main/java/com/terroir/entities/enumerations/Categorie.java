@@ -4,7 +4,7 @@ public enum Categorie {
 	Insolites("Produits Insolites"),
 	Boissons("Boissons"), 
 	Soupes("Soupes"), 
-	FruitsLegumes("Fruis & Légumes"), 
+	FruitsLegumes("Fruis et Légumes"), 
 	Viande("Viande"), 
 	Poisson("Poisson"), 
 	Laitiers("Produits Laitiers");

@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class Personne {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int personne_id;
 
 	private String personne_nom;

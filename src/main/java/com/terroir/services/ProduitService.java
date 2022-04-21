@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
@@ -206,12 +207,24 @@ public class ProduitService implements IProduitService {
         return produits;
     }
     
-    @Override
-    public List<Produit> getPopularProduits() {
+    /**
+     * Récuperer des produits de façon aléatoire
+     * @param nbProduitsAChoisir nb de produits à choisir
+     */
+    public List<Produit> getRandomProduits(int nbProduitsAChoisir) {
 
-         
+        List<Produit> produits = produitRepo.getAllProduits();
+        List<Produit> produitsChoisis = new ArrayList<>();
+        Random random = new Random();
 
-        return produitRepo.getPopularProduits();
+        for(; nbProduitsAChoisir > 0 && produits.size() > 0; nbProduitsAChoisir--)
+        {
+            int selectedIndex = random.nextInt(produits.size());
+            produitsChoisis.add(produits.get(selectedIndex));
+            produits.remove(selectedIndex);
+        }
+        
+        return produitsChoisis;
     }
 
     
@@ -237,12 +250,12 @@ public class ProduitService implements IProduitService {
     }
 
 
-    public Cooperative getCooperativeDesc(PathVariable cooperative_id) {
-        return cooperativeRepo.getCooperativeDesc(cooperative_id);
+    public Cooperative getCooperativeByID(int cooperative_id) {
+        return cooperativeRepo.getCooperativeByID(cooperative_id);
     }
 
 
-    public Produit getProduitDesc(PathVariable produit_id) {
-        return produitRepo.getProduitDesc(produit_id);
+    public Produit getProduitID(int produit_id) {
+        return produitRepo.getProduitByID(produit_id);
     }
 }

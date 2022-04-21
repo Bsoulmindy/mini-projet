@@ -15,7 +15,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" width="50%">Produit</th>
+                  <th scope="col" width="50%" style="text-align: center;">Produit</th>
                   <th scope="col"></th>
                   <th scope="col">Prix</th>
                   <th scope="col">Quantité</th>
@@ -26,26 +26,30 @@
                 <tr>
                   <td>
                     <div class="media">
-                      <div class="d-flex">
+                      <div class="d-flex justify-content-center">
                         <img
                           src="${ product.produit_image }"
                           alt=""
+                          height="196"
+                          width="256"
                         />
                       </div>
                       <div class="media-body">
-                        <p>${ product.produit_nom }</p>
+                        <p style="text-align: center;font-size: xx-large;color: black;margin-top: 1rem;">
+                          ${ product.produit_nom }
+                        </p>
                       </div>
                     </div>
                   </td>
                   <td></td>
                   <td>
-                    <h5 id="idPrix">${ product.produit_prix }</h5>
+                    <h5 id="${product.produit_id}Prix">${ product.produit_prix } DH</h5>
                   </td>
                   <td>
                     <div>
-                      <button type="button" class="btn btn-primary btn-sm btnSM me-5" onclick="Decrementer('id')">-</button>
-                      <span class="text-center my-0 me-5 nb-products-in-cart" id="id"></span>
-                      <button type="button" class="btn btn-primary btn-sm btnSM" onclick="Incrementer('id')">+</button>
+                      <button type="button" class="btn btn-primary btn-sm btnSM me-5" onclick="Decrementer('${product.produit_id}')">-</button>
+                      <span class="text-center my-0 me-5 nb-products-in-cart" id="${product.produit_id}"></span>
+                      <button type="button" class="btn btn-primary btn-sm btnSM" onclick="Incrementer('${product.produit_id}')">+</button>
                     </div>
                 </tr>
                 </c:forEach>
@@ -64,10 +68,10 @@
                   <td>
                     <div class="checkout_btn_inner">
                       <a class="gray_btn" href="/magasin">Retour au magasin</a>
-                      <c:if test='${role == "user"}'>
+                      <c:if test='${role == "User" || role == "Cooperative" || role == "Admin"}'>
                         <a  class="main_btn" href="/user/achat">Acheter</a>
                       </c:if>
-                      <c:if test='${role == null || role != "user"}'>
+                      <c:if test='${role == null || (role != "User" && role != "Cooperative" && role != "Admin")}'>
                         <a role="link" aria-disabled="true" class="main_btn">Connecter pour continuer</a>
                       </c:if>
                     </div>
@@ -80,7 +84,7 @@
       </div>
     </section>
     <!--================End Cart Area =================-->
-    <script src="inc/js/panier.js"></script>
+    <script src="/inc/js/panier.js"></script>
     <c:import url="/inc/footer.jsp"/>
   </body>
 </html>

@@ -39,12 +39,4 @@ public interface IProduitService {
      * @return
      */
     public List<Produit> getProduitsById(int... ids);
-
-    /**
-     * Recuperer les produits les pulus populaire     
-     * 
-     * @return <code>Liste</code> des produits Populaire
-     */
-     
-    public List<Produit> getPopularProduits();
 }

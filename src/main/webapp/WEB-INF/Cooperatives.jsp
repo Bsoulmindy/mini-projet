@@ -20,7 +20,7 @@
                   <div class="single-product" style="margin-bottom: 0px;">
                     
                     <div class="product-btm">
-                      <a href="/cooperativeDesc?cooperative_id=${ cooperative.cooperative_id }" class="d-block">
+                      <a href="/cooperatives/desc/${ cooperative.cooperative_id }" class="d-block">
                         <h4>${ cooperative.cooperative_nom }</h4>
                       </a>
                     </div>
@@ -41,7 +41,7 @@
                   <ul class="list">
                   <c:forEach items="${ secteurActivites }" var="secteurActivite" varStatus="status">
                     <li>
-                      <a href="/cooperative?secteurActivite=${ secteurActivite }">${ secteurActivite }</a>
+                      <a href="/cooperatives?secteurActivite=${ secteurActivite }">${ secteurActivite }</a>
                     </li>
                   </c:forEach>
                   </ul>
@@ -56,7 +56,7 @@
                     <ul class="list">
                         <c:forEach items="${ origines }" var="origine" varStatus="status">
                         <li>
-                          <a href="/category?origine=${ origine }">${ origine }</a>
+                          <a href="/cooperatives?origine=${ origine.origine_id }">${ origine.origine_nom }</a>
                         </li>
                         </c:forEach>
                       </ul>

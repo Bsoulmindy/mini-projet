@@ -52,7 +52,7 @@
         </c:if>
         <c:if test="${success != null && success}">
         <div class="d-flex flex-row justify-content-center my-2">
-            <div class="alert danger" style="color: white" role="alert">
+            <div class="alert primary" style="color: white" role="alert">
                 Votre compte a été créée avec succès
             </div>
         </div>

@@ -10,6 +10,6 @@ public class updateProductForm {
 	private String unite;
 	private String categorie;
 	private float prix;
-	private MultipartFile file;
+	private MultipartFile image;
 	private int idProduit;
 }

@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controlleur dédié aux utilisateurs
@@ -30,40 +29,41 @@ public class UserController {
 	public String tracking(Model model)
 	{
 		model.addAttribute("commandes", compteService.getAllCommandesOfUser());
+		model.addAttribute("active", "Espace");
 		return "Tracking"; 
 	}
 
 	@GetMapping(path = "devenirCoop")
-	public ModelAndView devenirCoopForm() {
-		ModelAndView model = new ModelAndView("DevenirCooperative");
-		model.addObject("secteurActivites", SecteurActivite.values());
-		model.addObject("origines", origineService.getAlOrigines());
+	public String devenirCoopForm(Model model) {
+		model.addAttribute("active", "Espace");
+		model.addAttribute("secteurActivites", SecteurActivite.values());
+		model.addAttribute("origines", origineService.getAlOrigines());
 
-		return model;
+		return "DevenirCooperative";
 	}
 
 	/**
 	 * Créer une demande pour devenir un coopérative
 	 */
 	@PostMapping(path = "devenirCoop")
-	public ModelAndView devenirCoop(String nom,String activite, String origine) {
+	public String devenirCoop(Model model, String nom,String activite, String origine) {
 
-		ModelAndView model = new ModelAndView("DevenirCooperative");
+		
 		try {
 			cooperativeService.devenirCooperative(nom, activite, origine, compteService.recupererPersonneActuel());
 		} catch (FormException e) {
-			model.addObject("error", e.getMessage());
-			return model;
+			model.addAttribute("error", e.getMessage());
+			return devenirCoopForm(model);
 		}
-		model.addObject("success", "Demande créé avec succès");
-		return model;
+		model.addAttribute("success", "Demande créé avec succès");
+		return devenirCoopForm(model);
 	}
 
 	/**
 	 * Acheter en se basant sur les cookies
 	 */
-	@GetMapping(path = "/achat/")
-	public String achat(HttpServletRequest request) { 
+	@GetMapping(path = "/achat")
+	public String achat(Model model, HttpServletRequest request) { 
 
 		compteService.acheter(request.getCookies());
 		return "Accueil";

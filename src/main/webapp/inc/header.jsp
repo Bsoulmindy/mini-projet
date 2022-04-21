@@ -5,13 +5,13 @@
       <div class="top_menu">
         <div class="container">
           <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-5">
               <div class="float-left">
                 <p>Phone: +212 49 84 21 32</p>
                 <p>email: contact@terroir.ma</p>
               </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-7">
               <div class="float-right">
                 <ul class="right_side">
                   <c:if test="${authentified == null || !authentified}">
@@ -23,7 +23,12 @@
                   </c:if>
                   <c:if test="${authentified != null && authentified}">
                     <li>
-                      <a href="/auth/deconnexion">
+                      <a>
+                        Bonjour, ${personneNom}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/deconnexion">
                         Déconnexion
                       </a>
                     </li>
@@ -72,7 +77,7 @@
                         aria-haspopup="true" aria-expanded="false">Magasin</a>
                       <ul class="dropdown-menu">
                         <li class='nav-item ${active == "Category" ? "active" : ""}'>
-                          <a class="nav-link" href="/produits">Catégories</a>
+                          <a class="nav-link" href="/category">Catégories</a>
                         </li>
                         <li class='nav-item ${active == "Panier" ? "active" : ""}'>
                           <a class="nav-link" href="/panier">Panier</a>
@@ -90,7 +95,7 @@
                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                         aria-haspopup="true" aria-expanded="false">Espace</a>
                       <ul class="dropdown-menu">
-                        <c:if test='${role == "User"}'>
+                        <c:if test='${role == "User" || role == "Cooperative"}'>
                           <li class='nav-item'>
                             <a class="nav-link" href="/user/tracking">Suivre votre commande</a>
                           </li>
@@ -102,17 +107,18 @@
                         </c:if>
                         <c:if test='${role == "Cooperative"}'>
                           <li class='nav-item'>
-                            <a class="nav-link" href="/cooperative/suiviCommande">Suivre commandes clients</a>
+                            <a class="nav-link" href="/cooperative/suiviCommandes">Suivre commandes clients</a>
                           </li>
                         </c:if>
                         <c:if test='${role == "Admin"}'>
                           <li class='nav-item'>
                             <a class="nav-link" href="/admin/gererCooperatives">Gérer les coopératives</a>
                           </li>
-                        </c:if>
-                        <c:if test='${role == "Admin"}'>
                           <li class='nav-item'>
                             <a class="nav-link" href="/admin/gererMatieresPremieres">Gérer les matières premières</a>
+                          </li>
+                          <li class='nav-item'>
+                            <a class="nav-link" href="/admin/gererOrigines">Gérer les origines</a>
                           </li>
                         </c:if>
                       </ul>
@@ -122,11 +128,6 @@
 
                 <div class="col-lg-1 pr-0">
                   <ul class="nav navbar-nav navbar-right right_nav pull-right">
-                  <c:if test="${authentified != null || authentified}">
-                    <li class="nav-item" style="font: 400 16px/80px Heebo, sans-serif;">
-                      Bonjour, ${personneNom}
-                    </li>
-                  </c:if>
                     <li class="nav-item">
                       <a href="/panier" class="icons">
                         <i class="ti-shopping-cart"></i>

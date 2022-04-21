@@ -39,8 +39,8 @@ public class Produit {
 
 
     // LES METHODES
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "produit", cascade = { CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.PERSIST })
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "produit", cascade = { CascadeType.MERGE, CascadeType.DETACH,
+            CascadeType.PERSIST, CascadeType.REMOVE })
     @Builder.Default
     List<ProduitMatiereAsso> produitMatieresAsso = new ArrayList<ProduitMatiereAsso>();
 
@@ -48,6 +48,6 @@ public class Produit {
     @JoinColumn(name = "cooperative_idref")
     private Cooperative cooperative;
 
-    @OneToMany(mappedBy = "produit")
+    @OneToMany(mappedBy = "produit", cascade = {CascadeType.REMOVE})
     private List<CommandeProduitAsso> commandeProduitAssos;
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class DemandeCooperative {
 	@EmbeddedId
-	private DemandeCooperativeKey id;
+	private DemandeCooperativeKey id = new DemandeCooperativeKey();
 	private boolean demande_approuvee;
 
 

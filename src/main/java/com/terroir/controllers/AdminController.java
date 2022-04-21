@@ -3,6 +3,9 @@ package com.terroir.controllers;
 import com.terroir.services.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 @RequestMapping("/admin/")
+@PreAuthorize("hasRole('Admin')")
 public class AdminController {
     
     @Autowired AdminService  adminService;
@@ -56,9 +60,10 @@ public class AdminController {
      * @param nom Le nom du nouveau matière première
      */
     @PostMapping("newMP")
-    public void newMP(String nom)
+    public ResponseEntity<String> newMP(String nom)
     {
         adminService.creerMatierePremiere(nom);
+        return ResponseEntity.status(HttpStatus.OK).body("Matière première ajouté!");
     }
 
     @GetMapping("getAllOrigine")
@@ -74,8 +79,9 @@ public class AdminController {
      * @param nom Le nom du nouveau origine
      */
     @PostMapping("newOrigine")
-    public void newOrigine(String nom)
+    public ResponseEntity<String> newOrigine(String nom)
     {
         adminService.creerOrigine(nom);
+        return ResponseEntity.status(HttpStatus.OK).body("Origine ajouté!");
     }
 }

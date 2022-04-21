@@ -1716,7 +1716,6 @@ footer {
   padding: 0 0 150px 0;
   overflow: hidden; }
   footer:before {
-    background: #ffffff;
     position: absolute;
     content: "";
     top: 0;

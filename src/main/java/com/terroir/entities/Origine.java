@@ -2,6 +2,7 @@ package com.terroir.entities;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -23,4 +24,7 @@ public class Origine {
     // LES METHODES
     @OneToMany(mappedBy = "origine")
     private Set<ProduitMatiereAsso> produitMatieresAsso;
+
+    @OneToMany(mappedBy = "origine")
+    private List<Cooperative> cooperatives;
 }

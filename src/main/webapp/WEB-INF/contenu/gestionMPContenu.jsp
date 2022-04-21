@@ -8,7 +8,9 @@
     </thead>
     <tbody>
         <c:forEach items="${ matierePremieres }" var="matierePremiere" varStatus="status">
-            <td>${matierePremiere.matiere_premiere_nom}</td>
+            <tr>
+                <td>${matierePremiere.matiere_premiere_nom}</td>
+            </tr>
         </c:forEach>
     </tbody>
 </table>

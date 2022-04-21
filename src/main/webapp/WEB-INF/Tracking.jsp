@@ -19,16 +19,19 @@
               </tr>
           </thead>
           <tbody>
-              <tr>
+              
                 <c:forEach items="${ commandes }" var="commande" varStatus="status">
-                  <c:forEach items="${ commande.getProduits }" var="produit">
-                    <td rowspan="${commande.getProduits.size()}">${ commande.commande_id }</td>
-                    <td>${ produit.produit_nom }</td>
-                    <td rowspan="${commande.getProduits.size()}">${ commande.commande_prix_total }</td>
-                    <td rowspan="${commande.getProduits.size()}">${ commande.commande_is_delivre }</td>
+                <tr>
+                  <c:forEach items="${ commande.getCommandeProduitAssos() }" var="cpa">
+                    <td rowspan="${commande.getCommandeProduitAssos().size()}">${ commande.commande_id }</td>
+                    <td>${cpa.getProduit().getProduit_nom()}</td>
+                    <td>${cpa.getQuantite()}</td>
+                    <td rowspan="${commande.getCommandeProduitAssos().size()}">${ commande.commande_prix_total } DH</td>
+                    <td rowspan="${commande.getCommandeProduitAssos().size()}">${ commande.commande_is_delivre }</td>
                     </c:forEach>
+                  </tr>
                 </c:forEach>
-              </tr>
+              
           </tbody>
       </table>
   </div>

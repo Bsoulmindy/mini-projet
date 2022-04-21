@@ -9,6 +9,10 @@
 
         <c:import url="/inc/formGestionOrigine.jsp"/>
 
+        <div class="d-flex justify-content-center my-2">
+          <h1>Gestion des origines</h1>
+        </div>
+
         <section class="cat_product_area section_gap">
             <div id="contenu">
                 <c:import url="/WEB-INF/contenu/gestionOrigineContenu.jsp"/>

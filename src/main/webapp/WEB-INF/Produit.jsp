@@ -62,7 +62,7 @@
     </div>
     <!--================End Single Product Area =================-->
 
-    <script src="inc/js/selectionProduits.js"></script>
+    <script src="/inc/js/selectionProduits.js"></script>
     <c:import url="/inc/footer.jsp"/>
   </body>
 </html>

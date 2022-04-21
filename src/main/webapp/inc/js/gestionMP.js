@@ -26,9 +26,9 @@ function getContenu()
 function ajouterMP(event) {
 	event.preventDefault()
 	event.stopPropagation()
-	const nom = document.getElementById("newMPNom");
+	const nom = document.getElementById("ajouterMPNom");
 
-	const newMPMessage = document.getElementById("newMPMessage");
+	const newMPMessage = document.getElementById("ajouterMPMessage");
 
 	// Traitement des données
 	const divTimeout = '<div class="alert alert-danger" role="alert">Connexion échoué avec le serveur, veuillez réssayer! </div>';
@@ -38,8 +38,6 @@ function ajouterMP(event) {
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', '/admin/newMP');
-	xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-type", "application/json");
 	xhr.timeout = 10000;
 	xhr.ontimeout = function () {
         newMPMessage.innerHTML = divTimeout;

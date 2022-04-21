@@ -1,6 +1,5 @@
 package com.terroir.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -19,12 +18,12 @@ public class CommandeProduitAsso {
 
 
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne()
 	@MapsId("produit_idref")
 	@JoinColumn(name = "produit_idref")
 	private Produit produit;
 
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne()
 	@MapsId("commande_idref")
 	@JoinColumn(name = "commande_idref")
 	private Commande commande;

@@ -1,6 +1,3 @@
-$('btn-accepterCoop').on('click' , gererDemandeCoop($(this), true))
-$('btn-refuserCoop').on('click' , gererDemandeCoop($(this), false))
-
 function getContenu() 
 {
     var xhr = new XMLHttpRequest();
@@ -15,24 +12,28 @@ function getContenu()
 		if(xhr.status == 200)
 		{
 			$('#contenu').html(xhr.responseText);
-			$('btn-accepterCoop').on('click' , gererDemandeCoop($(this), true))
-            $('btn-refuserCoop').on('click' , gererDemandeCoop($(this), false))
+			$('.btn-accepterCoop').on('click' , {isAccepted: true}, gererDemandeCoop)
+            $('.btn-refuserCoop').on('click' , {isAccepted: false}, gererDemandeCoop)
 		}
             
 	}
 	xhr.send();
 }
 
-function gererDemandeCoop(button, isAccepted)
+function gererDemandeCoop(e)
 {
     var xhr = new XMLHttpRequest();
     let form = new FormData();
-	form.append("idCooperative", button.attr('idCooperative'));
-	form.append("isAccepted", isAccepted);
-
+	form.append("idCooperative", this['value']);
+	form.append("isAccepted", e.data.isAccepted);
 	xhr.open('POST', "/admin/gererDemandeCoop");
-	xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-type", "application/json");
+
+	xhr.onload = function () {
+		if(xhr.status == 200)
+		{
+			getContenu();
+		}
+	}
 	xhr.send(form);
 }
 

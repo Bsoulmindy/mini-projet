@@ -7,6 +7,10 @@
   <body>
     <c:import url="/inc/header.jsp"/>
 
+    <div class="d-flex justify-content-center my-2">
+          <h1>Gestion des coopératives</h1>
+        </div>
+
     <section class="cat_product_area section_gap" id="contenu">
         
     </section>
