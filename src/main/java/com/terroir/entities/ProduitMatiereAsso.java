@@ -6,7 +6,8 @@ import javax.persistence.*;
 
 import com.terroir.entities.enumerations.Unite;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

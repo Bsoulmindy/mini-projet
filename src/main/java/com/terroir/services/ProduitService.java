@@ -180,18 +180,6 @@ public class ProduitService implements IProduitService {
         return produits;
     }
 
-   /*  //getAllProduitsOfListMatierePremiere
-    public List<Produit> getAllProduitsOfListMatierePremiere(List<MatierePremiere> listMatierePremiere){
-    
-        List<Produit> produits = new ArrayList<>();
-        for (MatierePremiere mp : listMatierePremiere) {
-            for (ProduitMatiereAsso asso : mp.getProduitMatieres()) {
-                produits.add(asso.getProduit());
-            }
-        }
-        return produits;
-    } */
-
     /**
      * Récupére list de toutes les Produits par une origine
      */

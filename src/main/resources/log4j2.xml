@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="ERROR">
+
     <Appenders>
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss--SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="LogToFile" fileName="logs/app.log">
+        <File name="PopularProducts" fileName="logs/popularProduits.log">
             <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+                <Pattern>%d %m%n</Pattern>
             </PatternLayout>
         </File>
-        <File name="PopularProducts" fileName="logs/popular.log">
+        <File name="SortedProducts" fileName="logs/sortedProduits.log">
             <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+                <Pattern>%d %m%n</Pattern>
             </PatternLayout>
         </File>
     </Appenders>
+
     <Loggers>
-        <Logger name="com.terroir" level="debug" additivity="false">
-            <AppenderRef ref="LogToFile"/>
-            <AppenderRef ref="LogToConsole"/>
-        </Logger>
         <Logger name="org.springframework.boot" level="error" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Logger name="produit" level="info" additivity="false">
-        <AppenderRef ref="PopularProducts"/>
+        <Logger name="com.terroir.aspect.PopularProductsAspect" level="info" additivity="false">
+            <AppenderRef ref="PopularProducts"/>
         </Logger>
-
+        <Logger name="com.terroir.aspect.SortedProductsAspect" level="info" additivity="false">
+            <AppenderRef ref="SortedProducts"/>
+        </Logger>
         <Root level="info">
-            <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
+
 </Configuration>
