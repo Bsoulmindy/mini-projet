@@ -25,6 +25,7 @@
             </thead>
             <tbody>
                 <c:forEach items="${ commandes }" var="commande" varStatus="status">
+                <tr>
                     <td>${commande.commande_id}</td>
                     <td>${commande.getCompte().getPersonne().getPersonne_nom()}</td>
                     <td>
@@ -43,6 +44,7 @@
                     </td>
                     <td>${commande.commande_prix_total} DH</td>
                     <td><input class="btn-toggleCommande" type="checkbox" idCommande="${commande.commande_id}" ${commande.commande_is_delivre ? 'checked' : ''}></td>
+                </tr>
                 </c:forEach>
             </tbody>
         </table>

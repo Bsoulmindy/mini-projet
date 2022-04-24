@@ -133,7 +133,17 @@ public class CooperativeService {
 
 		for (Produit produit : coop.getProduits()) {
 			for (CommandeProduitAsso asso : produit.getCommandeProduitAssos()) {
-				commandes.add(asso.getCommande());
+				Commande c = asso.getCommande();
+				//Vérifier s'il y a une commande similaire
+				boolean unique = true;
+				for (Commande commande : commandes) {
+					if(commande.getCommande_id() == c.getCommande_id())
+					{
+						unique = false;
+						break;
+					}
+				}
+				if(unique) commandes.add(c);
 			}
 		}
 
