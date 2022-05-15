@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class PopularProductsAspect {
 	@Autowired ProduitService produitService;
 
-	Logger log = LogManager.getLogger(SortedProductsAspect.class);
+	Logger log = LogManager.getLogger(PopularProductsAspect.class);
 	
 	/**
 	 * Journaliser les produits consultés
